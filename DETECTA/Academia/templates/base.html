@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="Description" content="Enter your description here" />
+    <!--Link Bootstrap-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <!--Link font awesome CDN página del lin: https://cdnjs.com/libraries/font-awesome-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+        integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/services.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/nosotros.css' %}">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js">
+    </script><script type="text/javascript" src="{% static 'js/hoja.js' %}"></script>
+    </script><script type="text/javascript" src="{% static 'js/nosotros.js' %}"></script>
+
+
+
+
+    <title>ACADEMIA DETECTA</title>
+
+    {% block head %}{% endblock %}
+</head>
+
+<body>
+    <section id="banner-row-floating" style="background-image: url('../Academia/static/img/estudiar5.jpg');">
+        <header>
+            <div id="logo">
+                <a href="#">
+                    <img src="/Academia/static/img/detecta.png" alt="Logo de la empresa">
+                </a>
+            </div>
+            <div id="nav">
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'index' %}">Inicio</a></li>
+                        <li><a href="{% url 'services' %}">Servicios</a></li>
+                        <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <section id="hero">
+            <h1>Bienvenido a nuestra página web</h1>
+            <p>Empresa líder en capacitación en línea en el sector agropecuario.</p>
+            <a href="{% url 'services' %}" class="btn btn-outline-success">Ver Servicios</a>
+        </section>
+    </section>
+
+    
+    {% block content %}{% endblock %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js">    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
+</body>
+
+<section>
+    <!--Esta etiqueta nos permite decirle al navegador que tenemos un pie de pagina-->
+    <footer id="footer">
+        <div class="container">
+            <div class="left-column">
+                <img src="/Academia/static/img/detecta.png" alt="Logo de la empresa">
+            </div>
+            <div class="center-column">
+                <h3>SERVICIOS</h3>
+                <ul>
+                    <li><a href="#">Mejoramiento de procesos</a></li>
+                    <li><a href="#">Asistencia profecional</a></li>
+                    <li><a href="#">Consultas</a></li>
+                    <li><a href="#">Asesoría</a></li>
+                </ul>
+            </div>
+            <div class="right-column">
+                <h3>PRIVACIDAD</h3>
+                <ul>
+                    <li><a href="#">Términos y condiciones</a></li>
+                    <li><a href="#">Política de privacidad</a></li>
+                    <li><a href="#">Aviso legal</a></li>
+                </ul>
+            </div>
+            <div class="social-column">
+                <h3>REDES SOCIALES</h3>
+                <ul class="list-inline">
+                    <li><a href="https://www.facebook.com/12mairena" target="_blank"><i
+                                class="fab fa-facebook-square fa-2x"></i></a></li>
+                    <li><a href="#" target="_blank"><i class="fab fa-twitter-square fa-2x"></i></a></li>
+                    <li><a href="https://github.com/Pablo88-bit" target="_blank"><i
+                                class="fab fa-github-square fa-2x"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/pablo-alem%C3%A1n-mairena-b1692b263/" target="_blank"><i
+                                class="fab fa-linkedin fa-2x"></i></a></li>
+                    <li>
+                        <a href="https://api.whatsapp.com/send?phone=85323707&text=HELLO" target="_blank">
+                            <i class="fab fa-whatsapp-square fa-2x"></i>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </footer>
+</section>
+</html>

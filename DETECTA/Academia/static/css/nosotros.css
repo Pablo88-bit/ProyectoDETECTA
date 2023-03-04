@@ -1,0 +1,81 @@
+.history-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
+.history-icon {
+    font-size: 3rem;
+    color: #4183D7;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+
+.history-info {
+    display: none;
+}
+
+
+
+
+.banner-row-floating {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px 0;
+}
+
+.training-row-floating {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.col-bottom-margin {
+    margin-bottom: 50px;
+}
+
+.employee-box {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    padding: 20px;
+}
+
+.employee-box:hover {
+    transform: scale(1.05);
+}
+
+.employee-box-title-container {
+    display: flex;
+    align-items: center;
+}
+
+.employee-box-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.employee-box-title-text-main {
+    margin-bottom: 0;
+    font-size: 18px;
+}
+
+.employee-box-title-text-subtitle {
+    font-size: 14px;
+    color: #666666;
+}
+
+.employee-box-body {
+    margin-top: 20px;
+}
+
+.employee-box-body-text {
+    font-size: 14px;
+    color: #666666;
+    line-height: 1.5;
+    text-align: justify;
+}
