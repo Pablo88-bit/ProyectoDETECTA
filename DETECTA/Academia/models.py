@@ -82,12 +82,12 @@ class MediosDidacticos(models.Model):
     nombre_medio = models.CharField(max_length=80, null=False, unique=True, verbose_name='Nombre del medio didactico')
     descripcion_medio = models.CharField(max_length=200, null=True, verbose_name='Descripcion', blank=True)
     cantidad = models.IntegerField(null=False, verbose_name='Cantidad')
-    precio = models.DecimalField(max_digits=12, null=False, verbose_name='Precio del producto') 
+    precio = models.DecimalField(max_digits=12, decimal_places=2, null=False, verbose_name='Precio del producto') 
     unidad_Medida = models.CharField(max_length=100, null=False, verbose_name='Unidad/medida del producto')
     fecha_caducidad = models.DateField(null=False, verbose_name='Fecha de caducidad del producto')
     fecha_compra = models.DateField(null=False, verbose_name='Fecha de la compra del producto')
-    costo_total = models.DecimalField(max_digits=14, null=False, verbose_name='Costo total') 
-    costo_unitario = models.DecimalField(max_digits=12, null=False, verbose_name='Costo Unitario') 
+    costo_total = models.DecimalField(max_digits=14, decimal_places=4, null=False, verbose_name='Costo total') 
+    costo_unitario = models.DecimalField(max_digits=12, decimal_places=2, null=False, verbose_name='Costo Unitario') 
     
      # En lugar de hacer la tabla catalogo utilice una lista que fucionará como tabla catalogo
     asignacion = [
@@ -119,12 +119,12 @@ class Materiales(models.Model):
     nombre_material = models.CharField(max_length=80, null=False, unique=True, verbose_name='Nombre del material ')
     descripcion_material = models.CharField(max_length=200, null=True, verbose_name='Descripcion', blank=True)
     cantidadMat = models.IntegerField(null=False, verbose_name='Cantidad')
-    precioMat = models.DecimalField(max_digits=12, null=False, verbose_name='Precio del material')
-    unidad_MedidaMat = models.CharField(null=False, verbose_name='Unidad/medida del material')
+    precioMat = models.DecimalField(max_digits=12, decimal_places=2, null=False, verbose_name='Precio del material')
+    unidad_MedidaMat = models.CharField(max_length=120, null=False, verbose_name='Unidad/medida del material')
     fecha_caducidadMat = models.DateField(null=False, verbose_name='Fecha de caducidad')
     fecha_compraMat = models.DateField(null=False, verbose_name='Fecha de la compra del material')
-    costo_totalMat = models.DecimalField(max_digits=14, null=False, verbose_name='Costo total')
-    costo_unitarioMat = models.DecimalField(max_digits=12, null=False, verbose_name='Costo Unitario')
+    costo_totalMat = models.DecimalField(max_digits=14, decimal_places=4, null=False, verbose_name='Costo total')
+    costo_unitarioMat = models.DecimalField(max_digits=12, decimal_places=2, null=False, verbose_name='Costo Unitario')
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -202,7 +202,7 @@ class Profesor(models.Model):
         ('F', 'Femenino'),
         ('N', 'No especificar')
     ]
-    generoTeacher = models.CharField(choices=genero, default=1, verbose_name='Género')
+    generoTeacher = models.CharField(max_length=1, choices=genero, default=1, verbose_name='Género')
 
     def save(self, *args, **kwargs):
         if not self.id:
@@ -310,7 +310,7 @@ class ProfesorMediosDidacticos(models.Model):
         ('S', 'Si'),
         ('N', 'NO')    
     ]
-    Received = models.CharField(choices=recibido, default=1, verbose_name='Confirmación de Recibido')
+    Received = models.CharField(max_length=1, choices=recibido, default=1, verbose_name='Confirmación de Recibido')
 
 # Modelo Materiales Profesor(relacion muchos a muchos)
 class MaterialesProfesor(models.Model):
@@ -323,7 +323,7 @@ class MaterialesProfesor(models.Model):
         ('S', 'Si'),
         ('N', 'NO')    
     ]
-    Received = models.CharField(choices=recibido, default=1, verbose_name='Confirmación de Recibido')
+    Received = models.CharField(max_length=1, choices=recibido, default=1, verbose_name='Confirmación de Recibido')
 
 # Modelo Medios Didacticos Proveedores(relacion muchos a muchos)
 class ProveedorMediosDidacticos(models.Model):
