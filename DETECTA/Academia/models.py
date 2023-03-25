@@ -149,14 +149,14 @@ class Proveedor(models.Model):
     descripcion_proveedor = models.CharField(max_length=200, null=True, verbose_name='Descripción', blank=True)
 
      # En lugar de hacer la tabla catalogo utilice una lista que fucionará como tabla catalogo
-    cali = [
-        (1, 'Buena Calidad'),
+    calidades = [
+        (1, 'Mala'),
         (2, 'Regular'),
-        (3, 'Mala Calidad'),
-        (4, 'Pésima Calidad')
+        (3, 'Buena'),
+        (4, 'Excelente')
     ]
 
-    Calidad = models.IntegerField(choices=cali, default=1, verbose_name='Calidad')
+    calidad = models.IntegerField(choices=calidades, default=1, verbose_name='Calidad')
     direccion = models.CharField(max_length=200, null=True, verbose_name='Dirección')
     observacion = models.CharField(max_length=200, null=True, verbose_name='Observaciones', blank=True)
 
@@ -192,17 +192,15 @@ class Profesor(models.Model):
         (1, 'Tecnico'),
         (2, 'Universidad'),
         (3, 'Master'),
-        (4, 'Posgrado'),
-        (5, 'Doctorado')
+        (4, 'Doctorado')
     ]
     codigo_nivel = models.IntegerField(choices=nivel, default=1, verbose_name='Nivel academico')
 
-    genero = [
+    sexos = [
         ('M', 'Masculino'),
         ('F', 'Femenino'),
-        ('N', 'No especificar')
     ]
-    generoTeacher = models.CharField(max_length=1, choices=genero, default=1, verbose_name='Género')
+    sexo = models.CharField(max_length=1, choices=sexos, default=1, verbose_name='Género')
 
     def save(self, *args, **kwargs):
         if not self.id:
