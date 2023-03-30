@@ -182,7 +182,7 @@ class Profesor(models.Model):
     carnet_teacher = models.CharField(max_length=11, unique=True, null=False)
     nombre_teacher = models.CharField(max_length=80, null=False, verbose_name='Nombre del Profesor')
     fechanac_teacher = models.DateField(null=False, verbose_name='Fecha de nacimiento')
-    Numero_cedula = models.DateField(null=False, verbose_name='Numero de cedula')#Cambiar a CharField
+    Numero_cedula = models.CharField(max_length=30, null=False, verbose_name='Numero de cedula')#Cambiar a CharField
     lugarOrigen_teacher = models.CharField(max_length=100, null=False, verbose_name='Lugar de nacimiento')
     nacionalidad_teacher = models.CharField(max_length=60, null=False, verbose_name='Nacionalidad')
     Referencias_profecionales = models.CharField(max_length=200, null=True, verbose_name='Referencias profecionales')

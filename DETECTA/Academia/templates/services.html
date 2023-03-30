@@ -1,6 +1,32 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
 
 {% block content %}
+<section id="banner-row-floating">
+    <video src="/Academia/static/img/Fondo.mp4" autoplay loop muted></video>
+    <header>
+      <div id="logo">
+        <a href="http://127.0.0.1:8000/admin/login/">
+          <img src="/Academia/static/img/detecta.png" alt="Logo de la empresa">
+        </a>
+      </div>
+      <div id="nav">
+        <nav>
+          <ul>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'services' %}">Servicios</a></li>
+            <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <section id="hero">
+      <!--h1>DETECTA es tu mejor opción</!h1-->
+      <a href="{% url 'nosotros' %}" class="btn btn-outline-success">Contactenos</a>
+    </section>
+</section>
+  
+
 
 <section id="descripcion">
     <div class="card descripcion">
