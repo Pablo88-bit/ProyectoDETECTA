@@ -7,9 +7,23 @@ from .models import AlumnoCurso, ProfesorCurso, MaterialesCurso, MediosDidactico
 from .models import MaterialesProfesor, ProfesorMediosDidacticos
 from .models import ProveedorMateriales, ProveedorMediosDidacticos
 
+
+
+#class AlumnoEmailAdmin(admin.ModelAdmin):
+        #=('email_alumno')
+        #("telefono_alumno", "email_alumno")
+class AlumnoAdmin(admin.ModelAdmin):
+        list_display=('carnet_alumno', 'nombre_alumno', 'username_alumno', 'nacionalidad_alumno', 'codigo_nivel')
+        search_fields=('carnet_alumno', 'nombre_alumno')
+        #list_editable("telefono_alumno", "email_alumno")
+        list_filter=('nacionalidad_alumno', 'lugar_alumno')
+
+
+
+
 # Register your models here.
 #Alumnos
-admin.site.register(Alumnos)
+admin.site.register(Alumnos, AlumnoAdmin)
 admin.site.register(TelefonoAlumno)
 admin.site.register(EmailAlumno)
 
@@ -39,3 +53,5 @@ admin.site.register(MaterialesProfesor)
 admin.site.register(ProfesorMediosDidacticos)
 admin.site.register(ProveedorMateriales)
 admin.site.register(ProveedorMediosDidacticos)
+
+

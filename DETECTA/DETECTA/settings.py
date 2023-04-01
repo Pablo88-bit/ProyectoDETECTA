@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +32,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',#Importando las interfaces del sistema administrativo plugin Jazzmin
+    'admin_interface',#Importando las interfaces del sistema administrativo
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +41,61 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Academia',
+    'colorfield',#Importando los colores del sistema administrativo
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+#Settings Jazzmin
+JAZZMIN_SETTINGS = {
+     # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "DETECTA",
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "DETECTA",
+    # Logo to use for your site, must be present in static files, used for brand on top left
+    "site_logo": "/img/detectaAdmin.png",
+    # Logo to use for login form in dark themes (defaults to login_logo)
+    #"login_logo_dark": None,
+    # Welcome text on the login screen
+    "welcome_sign": "Bienvenido a la Academia DETECTA",
+    'icons': {
+    'Academia.Cursos': 'fas fa-book',
+    'Academia.Alumnos': 'fas fa-user-graduate',
+    'Academia.Profesor': 'fas fa-chalkboard-teacher',
+    'Academia.Proveedor': 'fas fa-truck',
+    'Academia.TelefonoAlumno': 'fas fa-phone',
+    'Academia.EmailAlumno': 'far fa-envelope',
+    'Academia.TelefonoProfesor': 'fas fa-phone',
+    'Academia.EmailProfesor': 'far fa-envelope',
+    'Academia.TelefonoProveedor': 'fas fa-phone',
+    'Academia.EmailProveedor': 'far fa-envelope',
+    'Academia.Materiales': 'fas fa-chalkboard',
+    'Academia.MediosDidacticos': 'fas fa-laptop',
+    'Academia.AlumnoCurso': 'fas fa-graduation-cap',
+    'auth.user': 'fas fa-user',
+    'auth.group': 'fas fa-users',
+    'admin_interface.temes': 'fas fa-paint-brush'
+    },
+    
+    "topmenu_links": [
+        #{'app': 'Academia'},
+        {'models': 'Academia.Alumnos.Alumnos'},
+        {   'type': 'url',
+            'name': 'Inicio',
+            'url': 'http://127.0.0.1:8000',
+            "icon": "fas fa-house",
+        }
+    ]
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "custom",
+    "show_switch_theme": True,  # permite al usuario cambiar entre temas
+    "custom_css": "css/custom.css",
+}
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -104,7 +161,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
