@@ -133,9 +133,16 @@ WSGI_APPLICATION = 'DETECTA.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'Academia.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'DETECTA',
+        'HOST': 'localhost',
+        'USER': 'postgres',
+        'PASSWORD': 'piam2023',
+        'PORT': '5432',
+        #'OPTIONS': {
+        #    'driver': 'ODBC Driver 17 for SQL Server',
+        #},
+    },
 }
 
 
