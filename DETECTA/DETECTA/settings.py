@@ -52,9 +52,11 @@ JAZZMIN_SETTINGS = {
      # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "DETECTA",
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "DETECTA",
+    "site_header": 'DETECTA',
     # Logo to use for your site, must be present in static files, used for brand on top left
     "site_logo": "/img/detectaAdmin.png",
+     # Copyright on the footer
+    "copyright": "Academia DETECTA",
     # Logo to use for login form in dark themes (defaults to login_logo)
     #"login_logo_dark": None,
     # Welcome text on the login screen
@@ -81,6 +83,8 @@ JAZZMIN_SETTINGS = {
     "topmenu_links": [
         #{'app': 'Academia'},
         {'models': 'Academia.Alumnos.Alumnos'},
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
         {   'type': 'url',
             'name': 'Inicio',
             'url': 'http://127.0.0.1:8000',
@@ -90,10 +94,13 @@ JAZZMIN_SETTINGS = {
 }
 
 JAZZMIN_UI_TWEAKS = {
-    "theme": "custom",
-    "show_switch_theme": True,  # permite al usuario cambiar entre temas
-    "custom_css": "css/custom.css",
+    "theme": "simplex",
 }
+#JAZZMIN_UI_TWEAKS = {
+    #"theme": "custom",
+    #"show_switch_theme": True,  # permite al usuario cambiar entre temas
+    #"custom_css": "css/custom.css",
+#}
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
@@ -183,6 +190,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/Academia/static/'
+
+import os
+MEDIA_URL= '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

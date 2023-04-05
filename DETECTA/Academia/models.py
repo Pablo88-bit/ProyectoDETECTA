@@ -10,7 +10,9 @@ class Cursos(models.Model):
     nombre_curso = models.CharField(max_length=80, null=False, unique=True, verbose_name='Nombre del curso')
     fecha_inicio = models.DateField(null=False, verbose_name='Fecha inicio')
     fecha_final = models.DateField(null=False, verbose_name='Fecha final')
-    numero_horas = models.IntegerField(null=False, verbose_name='Número de horas duración del curso')
+    numero_horas = models.IntegerField(null=False, verbose_name='Número de horas duración del curso')   
+    image = models.ImageField(upload_to="Cursos", null=True, verbose_name="Imagen del curso")
+    descripcion_cursos = models.CharField(max_length=500, null=True, verbose_name='Descripción del curso')
     observaciones_cursos = models.CharField(max_length=200, null=True, verbose_name='Observaciones', blank=True)
 
     # En lugar de hacer la tabla catalogo utilice una lista que fucionará como tabla catalogo
@@ -185,6 +187,8 @@ class Profesor(models.Model):
     Numero_cedula = models.CharField(max_length=30, null=False, verbose_name='Numero de cedula')#Cambiar a CharField
     lugarOrigen_teacher = models.CharField(max_length=100, null=False, verbose_name='Lugar de nacimiento')
     nacionalidad_teacher = models.CharField(max_length=60, null=False, verbose_name='Nacionalidad')
+    image = models.ImageField(upload_to="Profesores", null=True, verbose_name="Imagen del profesor")
+    descripcion_profesor = models.CharField(max_length=500, null=True, verbose_name='Descripción del profesor')
     Referencias_profecionales = models.CharField(max_length=200, null=True, verbose_name='Referencias profecionales')
 
     # En lugar de hacer la tabla catalogo utilice una lista que fucionará como tabla catalogo
@@ -282,20 +286,41 @@ class AlumnoCurso(models.Model):
     num_participantes_i = models.IntegerField(null=False, verbose_name='Número inicial de participantes')
     num_participantes_f = models.IntegerField(null=False, verbose_name='Número final de participantes')
 
+    class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
+        db_table = 'AlumnoCurso'
+        verbose_name = 'Alumno y Curso'
+        verbose_name_plural = 'Alumnos y Cursos'
+
+
 # Modelo Cursos Profesor(relacion muchos a muchos)
 class ProfesorCurso(models.Model):
     profesor_id = models.ForeignKey(Profesor,on_delete=models.CASCADE)
     cursos_id = models.ForeignKey(Cursos, on_delete=models.CASCADE)
+
+    class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
+        db_table = 'ProfesorCurso'
+        verbose_name = 'Profesor y Curso'
+        verbose_name_plural = 'Profesores y Cursos'
 
 # Modelo cursos Medios Didacticos(Relacion muchos a muchos)
 class MediosDidacticosCurso(models.Model):
     mediosdidacticos_id = models.ForeignKey(MediosDidacticos, on_delete=models.CASCADE)
     cursos_id = models.ForeignKey(Cursos, on_delete=models.CASCADE)
 
+    class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
+        db_table = 'MediosDidacticosCurso'
+        verbose_name = 'Medio Didáctico y Curso'
+        verbose_name_plural = 'Medios Didácticos y Cursos'
+
 # Modelo Cursos Materiales(relacion muchos a muchos)
 class MaterialesCurso(models.Model):
     materiales_id = models.ForeignKey(Materiales, on_delete=models.CASCADE)
     cursosM_id = models.ForeignKey(Cursos, on_delete=models.CASCADE)
+
+    class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
+        db_table = 'MaterialesCurso'
+        verbose_name = 'Material y Curso'
+        verbose_name_plural = 'Materiales y Cursos'
 
 # Modelo Medios Didacticos Profesor(relacion muchos a muchos)
 class ProfesorMediosDidacticos(models.Model):
@@ -310,6 +335,11 @@ class ProfesorMediosDidacticos(models.Model):
     ]
     Received = models.CharField(max_length=1, choices=recibido, default=1, verbose_name='Confirmación de Recibido')
 
+    class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
+        db_table = 'ProfesorMediosDidacticos' 
+        verbose_name = 'Profesor y Medio Didáctico'
+        verbose_name_plural = 'Profesores y Medios Didácticos'
+
 # Modelo Materiales Profesor(relacion muchos a muchos)
 class MaterialesProfesor(models.Model):
     materiales_id = models.ForeignKey(Materiales, on_delete=models.CASCADE)
@@ -323,6 +353,11 @@ class MaterialesProfesor(models.Model):
     ]
     Received = models.CharField(max_length=1, choices=recibido, default=1, verbose_name='Confirmación de Recibido')
 
+    class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
+        db_table = 'ProfesorMateriales' 
+        verbose_name = 'Profesor y Material'
+        verbose_name_plural = 'Profesores y Materiales'
+
 # Modelo Medios Didacticos Proveedores(relacion muchos a muchos)
 class ProveedorMediosDidacticos(models.Model):
     medios_didactcos_id = models.ForeignKey(MediosDidacticos, on_delete=models.CASCADE)
@@ -330,12 +365,22 @@ class ProveedorMediosDidacticos(models.Model):
     fecha_compra = models.DateField(null=False, verbose_name='Fecha de compra')
     CantidadCompra = models.IntegerField(null=False, verbose_name='Cantidad Compra')
 
+    class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
+        db_table = 'ProveedorMediosDidacticos' 
+        verbose_name = 'Proveedor y Medio Didáctico'
+        verbose_name_plural = 'Proveedores y Medios Didácticos'
+
 # Modelo Materiales Proveedores(relacion muchos a muchos)
 class ProveedorMateriales(models.Model):
     materials_id = models.ForeignKey(Materiales, on_delete=models.CASCADE)
     proveedor_id = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     fechacompra = models.DateField(null=False, verbose_name='Fecha de compra')
     Cantidad_Compra = models.IntegerField(null=False, verbose_name='Cantidad Compra')
+
+    class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
+        db_table = 'ProveedorMateriales' 
+        verbose_name = 'Proveedor y Material'
+        verbose_name_plural = 'Proveedores y Materiales'
 
 
 
