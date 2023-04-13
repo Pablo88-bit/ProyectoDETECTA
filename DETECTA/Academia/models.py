@@ -6,7 +6,7 @@ from datetime import datetime
 
 # Modelo Cursos
 class Cursos(models.Model):
-    codigo_curso = models.CharField(max_length=11, unique=True, null=False)
+    codigo_curso = models.CharField(max_length=22, unique=True, null=False)
     nombre_curso = models.CharField(max_length=80, null=False, unique=True, verbose_name='Nombre del curso')
     fecha_inicio = models.DateField(null=False, verbose_name='Fecha inicio')
     fecha_final = models.DateField(null=False, verbose_name='Fecha final')
@@ -26,10 +26,10 @@ class Cursos(models.Model):
 
     codigo_especialidad = models.IntegerField(choices=especialidad, default=1, verbose_name='Especialidad')
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.codigo_curso = generate_codigocurso()
-        super(Cursos, self).save(*args, **kwargs)
+    #def save(self, *args, **kwargs):
+        #if not self.id:
+        #    self.codigo_curso = generate_codigocurso()
+        #super(Cursos, self).save(*args, **kwargs)
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'Cursos'
@@ -43,7 +43,7 @@ class Cursos(models.Model):
 # Modelo Alumnos
 class Alumnos(models.Model):
     cursos = models.ManyToManyField(Cursos, through='AlumnoCurso')
-    carnet_alumno = models.CharField(max_length=11, unique=True, null=False)
+    carnet_alumno = models.CharField(max_length=22, unique=True, null=False)
     nombre_alumno = models.CharField(max_length=80, null=False, verbose_name='Nombre del alumno')
     username_alumno = models.CharField(max_length=20, null=False, unique=True, verbose_name='Nombre de usuario')
     fechanac_alumno = models.DateField(null=False, verbose_name='Fecha de nacimiento')
@@ -63,10 +63,10 @@ class Alumnos(models.Model):
 
     codigo_nivel = models.IntegerField(choices=nivel, default=1, verbose_name='Nivel de escolaridad')
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.carnet_alumno = generate_carnetalumno()
-        super(Alumnos, self).save(*args, **kwargs)
+    #def save(self, *args, **kwargs):
+        #if not self.id:
+        #    self.carnet_alumno = generate_carnetalumno()
+        #super(Alumnos, self).save(*args, **kwargs)
 
     class Meta:                       # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'Alumnos'
@@ -80,7 +80,7 @@ class Alumnos(models.Model):
 # Modelo medios didacticos
 class MediosDidacticos(models.Model):
     cursos = models.ManyToManyField(Cursos, through='MediosDidacticosCurso')
-    codigo_medios = models.CharField(max_length=12, unique=True, null=False, verbose_name='Código Medios Didácticos')
+    codigo_medios = models.CharField(max_length=24, unique=True, null=False, verbose_name='Código Medios Didácticos')
     nombre_medio = models.CharField(max_length=80, null=False, unique=True, verbose_name='Nombre del medio didactico')
     descripcion_medio = models.CharField(max_length=200, null=True, verbose_name='Descripcion', blank=True)
     cantidad = models.IntegerField(null=False, verbose_name='Cantidad')
@@ -100,15 +100,15 @@ class MediosDidacticos(models.Model):
 
     estado_asignacion = models.IntegerField(choices=asignacion, default=1, verbose_name='Estado de asignacion')
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.codigo_medios = generate_codigomedios()
-        super(MediosDidacticos, self).save(*args, **kwargs)
+    #def save(self, *args, **kwargs):
+    #    if not self.id:
+    #        self.codigo_medios = generate_codigomedios()
+    #    super(MediosDidacticos, self).save(*args, **kwargs)
 
     class Meta:                  # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'Medios_Didacticos'
-        verbose_name = 'Medio Didactico'
-        verbose_name_plural = 'Medios Didacticos'
+        verbose_name = 'Medio Didáctico'
+        verbose_name_plural = 'Medios Didácticos'
 
     def __str__(self):           # Esta función nos permite retornar el objeto Medios didacticos
         return self.nombre_medio
@@ -117,7 +117,7 @@ class MediosDidacticos(models.Model):
 # Modelo materiales
 class Materiales(models.Model):
     cursos = models.ManyToManyField(Cursos, through='MaterialesCurso')
-    codigo_material = models.CharField(max_length=12, unique=True, null=False, verbose_name='Código Material')
+    codigo_material = models.CharField(max_length=24, unique=True, null=False, verbose_name='Código Material')
     nombre_material = models.CharField(max_length=80, null=False, unique=True, verbose_name='Nombre del material ')
     descripcion_material = models.CharField(max_length=200, null=True, verbose_name='Descripcion', blank=True)
     cantidadMat = models.IntegerField(null=False, verbose_name='Cantidad')
@@ -128,10 +128,10 @@ class Materiales(models.Model):
     costo_totalMat = models.DecimalField(max_digits=14, decimal_places=4, null=False, verbose_name='Costo total')
     costo_unitarioMat = models.DecimalField(max_digits=12, decimal_places=2, null=False, verbose_name='Costo Unitario')
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.codigo_material = generate_codigomaterial()
-        super(Materiales, self).save(*args, **kwargs)
+    #def save(self, *args, **kwargs):
+        #if not self.id:
+        #    self.codigo_material = generate_codigomaterial()
+        #super(Materiales, self).save(*args, **kwargs)
 
     class Meta:                  # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'Materiales'
@@ -146,7 +146,7 @@ class Materiales(models.Model):
 class Proveedor(models.Model):
     materials = models.ManyToManyField(Materiales, through='ProveedorMateriales')
     mediosdidactcos = models.ManyToManyField(MediosDidacticos, through='ProveedorMediosDidacticos')
-    codigo_proveedor = models.CharField(max_length=12, unique=True, null=False, verbose_name='Código Proveedor')
+    codigo_proveedor = models.CharField(max_length=24, unique=True, null=False, verbose_name='Código Proveedor')
     nombre_proveedor = models.CharField(max_length=80, null=False, unique=True, verbose_name='Nombre del proveedor')
     descripcion_proveedor = models.CharField(max_length=200, null=True, verbose_name='Descripción', blank=True)
 
@@ -162,10 +162,10 @@ class Proveedor(models.Model):
     direccion = models.CharField(max_length=200, null=True, verbose_name='Dirección')
     observacion = models.CharField(max_length=200, null=True, verbose_name='Observaciones', blank=True)
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.codigo_proveedor = generate_codigoproveedor()
-        super(Proveedor, self).save(*args, **kwargs)
+    #def save(self, *args, **kwargs):
+        #if not self.id:
+            #self.codigo_proveedor = generate_codigoproveedor()
+        #super(Proveedor, self).save(*args, **kwargs)
 
     class Meta:                  # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'Proveedor'
@@ -181,7 +181,7 @@ class Profesor(models.Model):
     materiales = models.ManyToManyField(Materiales, through='MaterialesProfesor')
     mediosdidacticos = models.ManyToManyField(MediosDidacticos, through='ProfesorMediosDidacticos')
     cursos = models.ManyToManyField(Cursos, through='ProfesorCurso')
-    carnet_teacher = models.CharField(max_length=11, unique=True, null=False)
+    carnet_teacher = models.CharField(max_length=22, unique=True, null=False)
     nombre_teacher = models.CharField(max_length=80, null=False, verbose_name='Nombre del Profesor')
     fechanac_teacher = models.DateField(null=False, verbose_name='Fecha de nacimiento')
     Numero_cedula = models.CharField(max_length=30, null=False, verbose_name='Numero de cedula')#Cambiar a CharField
@@ -206,10 +206,10 @@ class Profesor(models.Model):
     ]
     sexo = models.CharField(max_length=1, choices=sexos, default=1, verbose_name='Género')
 
-    def save(self, *args, **kwargs):
-        if not self.id:
-            self.carnet_teacher = generate_carnetprofe()
-        super(Profesor, self).save(*args, **kwargs)
+    #def save(self, *args, **kwargs):
+        #if not self.id:
+        #    self.carnet_teacher = generate_carnetprofe()
+        #super(Profesor, self).save(*args, **kwargs)
 
     class Meta:                  # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'Profesor'
@@ -227,10 +227,28 @@ class TelefonoAlumno(models.Model):
     alumno = models.ForeignKey(Alumnos, on_delete=models.CASCADE, null=True, blank=True)
     telefono_alumno = models.CharField(max_length=8, null=False, verbose_name='Teléfono')
 
+    tipo = [
+        (1, 'Número WhatsApp'),
+        (2, 'Número Telegram'),
+        (3, 'Número Móvil'),
+        (4, 'Número Convecional')
+    ]
+    codigo_tipo = models.IntegerField(choices=tipo, default=1, verbose_name='Tipo de Número')
+
+    empresa = [
+        (1, 'Claro'),
+        (2, 'Tigo'),
+        (3, 'Movistar'),
+        (4, 'Cootel'),
+        (5, 'Telcel'),
+        (6, 'Otra compañia teléfonica')
+    ]
+    codigo_empresa = models.IntegerField(choices=empresa, default=1, verbose_name='Compañia del Número')
+
     class Meta:                 # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'TelefonoAlumno'
-        verbose_name = 'Teléfono Alumno'
-
+        verbose_name = 'Teléfono del Alumno'
+        verbose_name_plural = 'Teléfonos del Alumno'
 
 # Modelo Correo Alumno (relación de 1 a muchos)
 class EmailAlumno(models.Model):
@@ -239,16 +257,37 @@ class EmailAlumno(models.Model):
 
     class Meta:                 # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'EmailAlumno'
-        verbose_name = 'Email Alumno'
+        verbose_name = 'Correo del Alumno'
+        verbose_name_plural = 'Correos del Alumno'
 
 # Modelo Telefono Profesor(relacion de 1 a muchos)
 class TelefonoProfesor(models.Model):
     profesor = models.ForeignKey(Profesor, on_delete=models.CASCADE, null=True, blank=True)
     telefono_profesor=models.CharField(max_length=8, null=False, verbose_name='Telefono')
     
+    tipo = [
+        (1, 'Número WhatsApp'),
+        (2, 'Número Telegram'),
+        (3, 'Número Móvil'),
+        (4, 'Número Convecional')
+    ]
+    codigo_tipo = models.IntegerField(choices=tipo, default=1, verbose_name='Tipo de Número')
+
+    empresa = [
+        (1, 'Claro'),
+        (2, 'Tigo'),
+        (3, 'Movistar'),
+        (4, 'Cootel'),
+        (5, 'Telcel'),
+        (6, 'Otra compañia teléfonica')
+    ]
+    codigo_empresa = models.IntegerField(choices=empresa, default=1, verbose_name='Compañia del Número')
+
+
     class Meta:                  # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'TelefonoProfesor'
-        verbose_name = 'Teléfono Profesor'
+        verbose_name = 'Teléfono del Profesor'
+        verbose_name_plural = 'Teléfonos del Profesor'
 
 # Modelo Correo Profesor(relacion de 1 a muchos)
 class EmailProfesor(models.Model):
@@ -257,16 +296,36 @@ class EmailProfesor(models.Model):
     
     class Meta:                 # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'EmailProfesor'
-        verbose_name = 'Email Profesor'
-
+        verbose_name = 'Correo del Profesor'
+        verbose_name_plural = 'Correos del Profesor'
 # Modelo Telefono Proveedor(relacion de 1 a muchos)
 class TelefonoProveedor(models.Model):
     proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE, null=True, blank=True)
     telefono_proveedor=models.CharField(max_length=8, null=False, verbose_name='Telefono')
     
+    tipo = [
+        (1, 'Número WhatsApp'),
+        (2, 'Número Telegram'),
+        (3, 'Número Móvil'),
+        (4, 'Número Convecional')
+    ]
+    codigo_tipo = models.IntegerField(choices=tipo, default=1, verbose_name='Tipo de Número')
+
+    empresa = [
+        (1, 'Claro'),
+        (2, 'Tigo'),
+        (3, 'Movistar'),
+        (4, 'Cootel'),
+        (5, 'Telcel'),
+        (6, 'Otra compañia teléfonica')
+    ]
+    codigo_empresa = models.IntegerField(choices=empresa, default=1, verbose_name='Compañia del Número')
+
+
     class Meta:                  # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'TelefonoProveedor'
-        verbose_name = 'Telefono Proveedor'
+        verbose_name = 'Teléfono del Proveedor'
+        verbose_name_plural = 'Teléfonos del Proveedor'
 
 # Modelo Correo Proveedor(relacion de 1 a muchos)
 class EmailProveedor(models.Model):
@@ -275,7 +334,8 @@ class EmailProveedor(models.Model):
     
     class Meta:                 # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'EmailProveedor'
-        verbose_name = 'Email Proveedor'
+        verbose_name = 'Correo del Proveedor'
+        verbose_name_plural = 'Correos del Proveedor'
 
 
 
@@ -288,8 +348,8 @@ class AlumnoCurso(models.Model):
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'AlumnoCurso'
-        verbose_name = 'Alumno y Curso'
-        verbose_name_plural = 'Alumnos y Cursos'
+        verbose_name = 'Matricula'
+        verbose_name_plural = 'Matriculas'
 
 
 # Modelo Cursos Profesor(relacion muchos a muchos)
@@ -299,8 +359,8 @@ class ProfesorCurso(models.Model):
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'ProfesorCurso'
-        verbose_name = 'Profesor y Curso'
-        verbose_name_plural = 'Profesores y Cursos'
+        verbose_name = 'Asignación de Curso'
+        verbose_name_plural = 'Asignación de Cursos'
 
 # Modelo cursos Medios Didacticos(Relacion muchos a muchos)
 class MediosDidacticosCurso(models.Model):
@@ -309,8 +369,8 @@ class MediosDidacticosCurso(models.Model):
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'MediosDidacticosCurso'
-        verbose_name = 'Medio Didáctico y Curso'
-        verbose_name_plural = 'Medios Didácticos y Cursos'
+        verbose_name = 'Asignación de Medio Didáctico'
+        verbose_name_plural = 'Asignación de Medios Didácticos'
 
 # Modelo Cursos Materiales(relacion muchos a muchos)
 class MaterialesCurso(models.Model):
@@ -319,8 +379,8 @@ class MaterialesCurso(models.Model):
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'MaterialesCurso'
-        verbose_name = 'Material y Curso'
-        verbose_name_plural = 'Materiales y Cursos'
+        verbose_name = 'Asignación de Material'
+        verbose_name_plural = 'Asignación de Materiales'
 
 # Modelo Medios Didacticos Profesor(relacion muchos a muchos)
 class ProfesorMediosDidacticos(models.Model):
@@ -337,8 +397,8 @@ class ProfesorMediosDidacticos(models.Model):
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'ProfesorMediosDidacticos' 
-        verbose_name = 'Profesor y Medio Didáctico'
-        verbose_name_plural = 'Profesores y Medios Didácticos'
+        verbose_name = 'Asignación de Medio Didáctico'
+        verbose_name_plural = 'Asignación de Medios Didácticos'
 
 # Modelo Materiales Profesor(relacion muchos a muchos)
 class MaterialesProfesor(models.Model):
@@ -355,72 +415,72 @@ class MaterialesProfesor(models.Model):
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'ProfesorMateriales' 
-        verbose_name = 'Profesor y Material'
-        verbose_name_plural = 'Profesores y Materiales'
+        verbose_name = 'Asignación de Material'
+        verbose_name_plural = 'Asignación de Materiales'
 
 # Modelo Medios Didacticos Proveedores(relacion muchos a muchos)
 class ProveedorMediosDidacticos(models.Model):
-    medios_didactcos_id = models.ForeignKey(MediosDidacticos, on_delete=models.CASCADE)
+    medios_didacticos_id = models.ForeignKey(MediosDidacticos, on_delete=models.CASCADE)
     proveedor_id = models.ForeignKey(Proveedor,on_delete=models.CASCADE)
     fecha_compra = models.DateField(null=False, verbose_name='Fecha de compra')
     CantidadCompra = models.IntegerField(null=False, verbose_name='Cantidad Compra')
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'ProveedorMediosDidacticos' 
-        verbose_name = 'Proveedor y Medio Didáctico'
-        verbose_name_plural = 'Proveedores y Medios Didácticos'
+        verbose_name = 'Compra de Medio Didáctico'
+        verbose_name_plural = 'Compra de Medios Didácticos'
 
 # Modelo Materiales Proveedores(relacion muchos a muchos)
 class ProveedorMateriales(models.Model):
-    materials_id = models.ForeignKey(Materiales, on_delete=models.CASCADE)
+    materiales_id = models.ForeignKey(Materiales, on_delete=models.CASCADE)
     proveedor_id = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     fechacompra = models.DateField(null=False, verbose_name='Fecha de compra')
     Cantidad_Compra = models.IntegerField(null=False, verbose_name='Cantidad Compra')
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'ProveedorMateriales' 
-        verbose_name = 'Proveedor y Material'
-        verbose_name_plural = 'Proveedores y Materiales'
+        verbose_name = 'Compra de Material'
+        verbose_name_plural = 'Compra de Materiales'
 
 
 
 
 
 # Funciones genera Documents únicos(carnet, códigos, etc...)
-def generate_carnetalumno():
-    year = str(datetime.now().year)                     # Se obtiene el año actual
-    rand_int = str(random.randint(0, 999999)).zfill(6)  # Se obtiene un número aleatorio
-    my_field = f"{year}-{rand_int}ED"                   # Se guarda la nomeclatura
-    return my_field                                     # Retorna el carnet
+#def generate_carnetalumno():
+#    year = str(datetime.now().year)                     # Se obtiene el año actual
+#    rand_int = str(random.randint(0, 999999)).zfill(6)  # Se obtiene un número aleatorio
+#    my_field = f"{year}-{rand_int}ED"                   # Se guarda la nomeclatura
+#    return my_field                                     # Retorna el carnet
 
-def generate_codigomedios():
-    year = str(datetime.now().year)                     # Se obtiene el año actual
-    rand_int = str(random.randint(0, 999999)).zfill(6)  # Se obtiene un número aleatorio
-    my_field = f"{year}-{rand_int}MD"                   # Se guarda la nomeclatura
-    return my_field                                     # Retorna el codigo
+#def generate_codigomedios():
+#    year = str(datetime.now().year)                     # Se obtiene el año actual
+#    rand_int = str(random.randint(0, 999999)).zfill(6)  # Se obtiene un número aleatorio
+#    my_field = f"{year}-{rand_int}MD"                   # Se guarda la nomeclatura
+#    return my_field                                     # Retorna el codigo
 
-def generate_codigomaterial():   
-    year = str(datetime.now().year)                     # Se obtiene el año actual
-    rand_int = str(random.randint(0, 999999)).zfill(6)  # Se obtiene un número aleatorio
-    my_field = f"{year}-{rand_int}MTD"                    # Se guarda la nomeclatura
-    return my_field                                     # Retorna el codigo
+#def generate_codigomaterial():   
+#    year = str(datetime.now().year)                     # Se obtiene el año actual
+#    rand_int = str(random.randint(0, 999999)).zfill(6)  # Se obtiene un número aleatorio
+#    my_field = f"{year}-{rand_int}MTD"                    # Se guarda la nomeclatura
+#    return my_field                                     # Retorna el codigo
 
-def generate_codigoproveedor():
-    year = str(datetime.now().year)                     # Se obtiene el año actual
-    rand_int = str(random.randint(0, 999999)).zfill(6)  # Se obtiene un número aleatorio
-    my_field = f"{year}-{rand_int}PRD"                   # Se guarda la nomeclatura
-    return my_field                                     # Retorna el codigo
+#def generate_codigoproveedor():
+#    year = str(datetime.now().year)                     # Se obtiene el año actual
+#    rand_int = str(random.randint(0, 999999)).zfill(6)  # Se obtiene un número aleatorio
+#    my_field = f"{year}-{rand_int}PRD"                   # Se guarda la nomeclatura
+#    return my_field                                     # Retorna el codigo
 
-def generate_carnetprofe():
-    year = str(datetime.now().year)                     # Se obtiene el año actual
-    rand_int = str(random.randint(0, 999999)).zfill(6)  # Se obtiene un número aleatorio 
-    my_field = f"{year}-{rand_int}DD"                  # Se guarda la nomeclatura
-    return my_field                                     # Retorna el codigo
+#def generate_carnetprofe():
+#    year = str(datetime.now().year)                     # Se obtiene el año actual
+#    rand_int = str(random.randint(0, 999999)).zfill(6)  # Se obtiene un número aleatorio 
+#    my_field = f"{year}-{rand_int}DD"                  # Se guarda la nomeclatura
+#    return my_field                                     # Retorna el codigo
 
-def generate_codigocurso():
-    year = str(datetime.now().year)                      # Se obtiene el año actual
-    rand_int = str(random.randint(0, 999999)).zfill(6)   # Se obtiene un número aleatorio
-    my_field = f"{year}{rand_int}C-D"                    # Se guarda la nomeclatura
-    return my_field                                      # Retorna el codigo
+#def generate_codigocurso():
+#    year = str(datetime.now().year)                      # Se obtiene el año actual
+#    rand_int = str(random.randint(0, 999999)).zfill(6)   # Se obtiene un número aleatorio
+#    my_field = f"{year}{rand_int}C-D"                    # Se guarda la nomeclatura
+#    return my_field                                      # Retorna el codigo
 
 # id=1 codigo curso=20238888C-D
