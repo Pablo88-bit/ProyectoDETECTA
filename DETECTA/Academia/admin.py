@@ -28,7 +28,7 @@ class EmailAlumnoInline(admin.TabularInline):
 
 class AlumnoAdmin(admin.ModelAdmin):
         form = AlumnoForm
-        list_per_page = 1
+        list_per_page = 4
         list_display=('carnet_alumno', 'nombre_alumno', 'username_alumno', 'nacionalidad_alumno', 'codigo_nivel')
         search_fields=('carnet_alumno', 'nombre_alumno')
         #list_editable("telefono_alumno", "email_alumno")
@@ -36,7 +36,11 @@ class AlumnoAdmin(admin.ModelAdmin):
         inlines = [
                 TelefonoAlumnoInline,
                 EmailAlumnoInline,
-        ]
+        ] 
+
+        #Ocultando el eliminar
+        def has_delete_permission(self, request, obj=None):
+                return False
 
 #Alumnos
 admin.site.register(Alumnos, AlumnoAdmin)
@@ -65,17 +69,23 @@ class EmailProfesorInline(admin.TabularInline):
 
 class ProfesorCursoInline(admin.TabularInline):
         model = ProfesorCurso
+        extra = 0
+        min_num = 1
 
 class MaterialesProfesorInline(admin.TabularInline):
         model = MaterialesProfesor
+        extra = 0
+        min_num = 1
 
 
 class ProfesorMediosDidacticosInline(admin.TabularInline):
         model = ProfesorMediosDidacticos
+        extra = 0
+        min_num = 1
 
 class   ProfesorAdmin(admin.ModelAdmin):
         form = ProfesorForm
-        list_per_page = 1
+        list_per_page = 4
         list_display=('carnet_teacher', 'nombre_teacher', 'Numero_cedula', 'sexo', 'nacionalidad_teacher', 'codigo_nivel')
         search_fields=('carnet_teacher', 'nombre_teacher')
         list_filter=('nacionalidad_teacher', 'sexo')
@@ -86,6 +96,11 @@ class   ProfesorAdmin(admin.ModelAdmin):
                 MaterialesProfesorInline,
                 ProfesorMediosDidacticosInline,
         ]
+
+        #Ocultando el eliminar
+        def has_delete_permission(self, request, obj=None):
+                return False
+
 
 
 #Profesores
@@ -114,23 +129,30 @@ class EmailProveedorInline(admin.TabularInline):
 
 class ProveedorMediosDidacticosInline(admin.TabularInline):
         model = ProveedorMediosDidacticos
+        extra = 0
+        min_num = 1
 
 class ProveedorMaterialesInline(admin.TabularInline):
         model = ProveedorMateriales
-
+        extra = 0
+        min_num = 1
 
 class   ProveedorAdmin(admin.ModelAdmin):
         form = ProveedorForm
-        list_per_page = 1
+        list_per_page = 4
         list_display=('codigo_proveedor', 'nombre_proveedor', 'calidad', 'direccion')
         search_fields=('codigo_proveedor', 'nombre_proveedor')
-        #list_filter=('calidad')
+        list_filter=('nombre_proveedor', 'calidad')
         inlines = [
                 TelefonoProveedorInline,
                 EmailProveedorInline,
                 ProveedorMediosDidacticosInline,
                 ProveedorMaterialesInline,
         ]
+
+        #Ocultando el eliminar
+        def has_delete_permission(self, request, obj=None):
+                return False
 
 #Proveedores
 admin.site.register(Proveedor, ProveedorAdmin)
@@ -158,7 +180,7 @@ class MaterialesCursoInline(admin.TabularInline):
 
 class  CursoAdmin(admin.ModelAdmin):
         form = CursoForm
-        list_per_page = 1
+        list_per_page = 4
         list_display=('codigo_curso', 'nombre_curso', 'image', 'codigo_especialidad')
         search_fields=('codigo_curso', 'nombre_curso')
         list_filter=('fecha_inicio', 'fecha_final')
@@ -167,6 +189,10 @@ class  CursoAdmin(admin.ModelAdmin):
                 MediosDidacticosCursoInline,
                 MaterialesCursoInline,
         ]
+
+        #Ocultando el eliminar
+        def has_delete_permission(self, request, obj=None):
+                return False
 
 #Cursos
 admin.site.register(Cursos, CursoAdmin)
@@ -183,10 +209,14 @@ class MaterialesForm(forms.ModelForm):
 
 class MaterialesAdmin(admin.ModelAdmin):
         form = MaterialesForm
-        list_per_page = 1
+        list_per_page = 4
         list_display=('codigo_material', 'nombre_material', 'unidad_MedidaMat', 'costo_unitarioMat', 'costo_totalMat', 'cantidadMat')
         search_fields=('codigo_material', 'nombre_material')
         list_filter=('nombre_material', 'unidad_MedidaMat')
+
+        #Ocultando el eliminar
+        def has_delete_permission(self, request, obj=None):
+                return False
 
 #Materiales
 admin.site.register(Materiales, MaterialesAdmin)
@@ -206,10 +236,14 @@ class MediosDidacticosForm(forms.ModelForm):
 
 class MediosDidacticosAdmin(admin.ModelAdmin):
         form = MediosDidacticosForm
-        list_per_page = 1
+        list_per_page = 4
         list_display=('codigo_medios', 'nombre_medio', 'unidad_Medida', 'costo_unitario', 'costo_total', 'estado_asignacion')
         search_fields=('codigo_medios', 'nombre_medio')
         list_filter=('estado_asignacion', 'unidad_Medida')
+
+        #Ocultando el eliminar
+        def has_delete_permission(self, request, obj=None):
+                return False
 
 #Medios Didácticos
 admin.site.register(MediosDidacticos, MediosDidacticosAdmin)
