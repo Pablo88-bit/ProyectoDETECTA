@@ -17,6 +17,7 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -89,7 +90,12 @@ JAZZMIN_SETTINGS = {
             'name': 'Inicio',
             'url': 'http://127.0.0.1:8000',
             "icon": "fas fa-house",
-        }
+        }#,
+        #{   'type': 'url',
+        #    'name': 'Graficos',
+        #    'url': 'http://127.0.0.1:8000/graficos/',
+        #    "icon": "fas fa-house",
+        #}
     ]
 }
 

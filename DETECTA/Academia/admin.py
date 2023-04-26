@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django import forms
+from django import forms   
 from .models import Alumnos, TelefonoAlumno, EmailAlumno
 from .models import Profesor, TelefonoProfesor, EmailProfesor
 from .models import Proveedor, TelefonoProveedor, EmailProveedor
@@ -41,6 +41,7 @@ class AlumnoAdmin(admin.ModelAdmin):
         #Ocultando el eliminar
         def has_delete_permission(self, request, obj=None):
                 return False
+
 
 #Alumnos
 admin.site.register(Alumnos, AlumnoAdmin)
