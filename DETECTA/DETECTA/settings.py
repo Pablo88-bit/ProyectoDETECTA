@@ -10,10 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -31,6 +33,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',#Importando las interfaces del sistema administrativo plugin Jazzmin
+    'admin_interface',#Importando las interfaces del sistema administrativo
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -38,7 +42,73 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Academia',
+    'colorfield',#Importando los colores del sistema administrativo
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
+
+#Settings Jazzmin
+JAZZMIN_SETTINGS = {
+     # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "DETECTA",
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": 'DETECTA',
+    # Logo to use for your site, must be present in static files, used for brand on top left
+    "site_logo": "/img/detectaAdmin.png",
+     # Copyright on the footer
+    "copyright": "Academia DETECTA",
+    # Logo to use for login form in dark themes (defaults to login_logo)
+    #"login_logo_dark": None,
+    # Welcome text on the login screen
+    "welcome_sign": "Bienvenido a la Academia DETECTA",
+    'icons': {
+    'Academia.Cursos': 'fas fa-book',
+    'Academia.Alumnos': 'fas fa-user-graduate',
+    'Academia.Profesor': 'fas fa-chalkboard-teacher',
+    'Academia.Proveedor': 'fas fa-truck',
+    'Academia.TelefonoAlumno': 'fas fa-phone',
+    'Academia.EmailAlumno': 'far fa-envelope',
+    'Academia.TelefonoProfesor': 'fas fa-phone',
+    'Academia.EmailProfesor': 'far fa-envelope',
+    'Academia.TelefonoProveedor': 'fas fa-phone',
+    'Academia.EmailProveedor': 'far fa-envelope',
+    'Academia.Materiales': 'fas fa-chalkboard',
+    'Academia.MediosDidacticos': 'fas fa-laptop',
+    'Academia.AlumnoCurso': 'fas fa-graduation-cap',
+    'auth.user': 'fas fa-user',
+    'auth.group': 'fas fa-users',
+    'admin_interface.temes': 'fas fa-paint-brush'
+    },
+    
+    "topmenu_links": [
+        #{'app': 'Academia'},
+        {'models': 'Academia.Alumnos.Alumnos'},
+        {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
+        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {   'type': 'url',
+            'name': 'Inicio',
+            'url': 'http://127.0.0.1:8000',
+            "icon": "fas fa-house",
+        }#,
+        #{   'type': 'url',
+        #    'name': 'Graficos',
+        #    'url': 'http://127.0.0.1:8000/graficos/',
+        #    "icon": "fas fa-house",
+        #}
+    ]
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "simplex",
+}
+#JAZZMIN_UI_TWEAKS = {
+    #"theme": "custom",
+    #"show_switch_theme": True,  # permite al usuario cambiar entre temas
+    #"custom_css": "css/custom.css",
+#}
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +125,7 @@ ROOT_URLCONF = 'DETECTA.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,9 +146,16 @@ WSGI_APPLICATION = 'DETECTA.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'DETECTA',
+        'HOST': 'localhost',
+        'USER': 'postgres',
+        'PASSWORD': 'piam2023',
+        'PORT': '5432',
+        #'OPTIONS': {
+        #    'driver': 'ODBC Driver 17 for SQL Server',
+        #},
+    },
 }
 
 
@@ -104,7 +181,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -119,6 +196,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/Academia/static/'
+
+import os
+MEDIA_URL= '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

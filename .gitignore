@@ -1,0 +1,8 @@
+# Ignorar archivos generados por Python
+*.pyc
+__pycache__/
+
+
+# Ignorar archivos con información sensible(password and API)
+config.json
+secrets.txt

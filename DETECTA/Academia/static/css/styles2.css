@@ -1,0 +1,186 @@
+
+/* Estilos del header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    padding: 20px;
+}
+
+/* Estilos del logo */
+#logo a {
+    display: block;
+    padding: 30px;
+    float: left;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#logo img {
+    width: 160px;
+    height: auto;
+}
+
+/* Estilos del menú de navegación */
+#nav {
+    display: flex;
+    float: right;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    width: calc(120% - 800px);/* 120px es el ancho del contenedor del logo */
+    height: calc(10% - -200px);
+}
+
+#nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    padding-left: 316px;
+}
+
+#nav li {
+    margin: 0 10px;
+    padding-top: 52px;
+}
+
+#nav a {
+    color: #fff;
+    font-size: 1.4em;
+    text-decoration: none;
+}
+
+#nav a:hover {
+    color:#333;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+#banner-row-floating {
+    position: relative;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  #banner-row-floating video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  
+
+#hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: #fff;
+    text-align: center;
+}
+
+#hero h1 {
+    font-size: 3em;
+    padding-top: 150px;
+}
+
+#hero p {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
+
+#hero a {
+    display: inline-block;
+    font-size: 1.2em;
+    padding: 105px 100px;
+    border-radius: 5px;
+    color: #fff;
+    border-color: rgb(16, 252, 106);
+    text-decoration: none;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+#hero .a:hover {
+    background-color: rgb(221, 170, 122);
+    color: #fff;
+}
+
+
+
+
+/* footer */
+#footer {
+    background-color: rgba(61, 8, 184, 0.678);
+    /*background-color: rgba(241, 26, 98, 0.678); ES UN ROSADO TUANI XD*/
+    text-shadow: -1px 0 black, 0 1px black, 1px black, 0 -1px black;
+    color: #fff;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+#footer .container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#footer img {
+    display: flex;
+    padding: 30px;
+    width: 200px;
+    height: 160px;
+}
+
+#footer h3 {
+    font-size: 1.2em;
+    margin: 0 0 20px;
+}
+
+#footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#footer li {
+    font-size: 0.8em;
+    line-height: 1.5;
+}
+
+#footer a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+#footer a:hover {
+    color: #333;
+}
+
+#footer .fa {
+    font-size: 1.5em;
+    margin: 0 5px;
+}
+
+.list-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.list-inline li {
+    margin-right: 10px;
+}
+  

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render #Plantillas
 
 # Create your views here.
 def index(request):
@@ -11,3 +11,5 @@ def services(request):
 
 def nosotros(request):
     return render(request, 'nosotros.html')
+
+    
