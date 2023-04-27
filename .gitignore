@@ -1,0 +1,13 @@
+# Ignorar archivos generados por Python
+*.pyc
+__pycache__/
+**/__pycache__/
+DETECTA/Academia/__pycache__/
+DETECTA/Academia/migrations/__pycache__/
+DETECTA/DETECTA/__pycache__/
+
+
+
+# Ignorar archivos con información sensible(password and API)
+config.json
+secrets.txt
