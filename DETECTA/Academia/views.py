@@ -11,3 +11,6 @@ def services(request):
 
 def nosotros(request):
     return render(request, 'nosotros.html')
+
+def TerminosCondiciones(request):
+    return render(request,'TerminosCondiciones.html')

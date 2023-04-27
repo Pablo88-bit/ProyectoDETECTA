@@ -32,7 +32,7 @@
 </head>
 
 <body>
-    <section id="banner-row-floating" style="background-image: url('../Academia/static/img/estudiar5.jpg');">
+
         <header>
             <div id="logo">
                 <a href="#">
@@ -41,22 +41,18 @@
             </div>
             <div id="nav">
                 <nav>
-                    <ul>
-                        <li><a href="{% url 'index' %}">Inicio</a></li>
-                        <li><a href="{% url 'services' %}">Servicios</a></li>
-                        <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
-                        <li><a href="#">Contacto</a></li>
-                    </ul>
+                    <body>
+                        <ul>
+                            <li><a href="{% url 'index' %}">Inicio</a></li>
+                            <li><a href="{% url 'services' %}">Servicios</a></li>
+                            <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+                            <li><a href="#">Contacto</a></li>
+                        </ul>
+                    </body>
                 </nav>
             </div>
         </header>
-        <section id="hero">
-            <h1>Bienvenido a nuestra página web</h1>
-            <p>Empresa líder en capacitación en línea en el sector agropecuario.</p>
-            <a href="{% url 'services' %}" class="btn btn-outline-success">Ver Servicios</a>
-        </section>
     </section>
-
     
     {% block content %}{% endblock %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js">    </script>
