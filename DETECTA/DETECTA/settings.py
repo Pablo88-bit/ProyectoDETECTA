@@ -150,7 +150,7 @@ DATABASES = {
         'NAME': 'DETECTA',
         'HOST': 'localhost',
         'USER': 'postgres',
-        'PASSWORD': 'piam2023',
+        'PASSWORD': 'RIEL2003',
         'PORT': '5432',
         #'OPTIONS': {
         #    'driver': 'ODBC Driver 17 for SQL Server',

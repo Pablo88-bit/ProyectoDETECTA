@@ -1,26 +1,33 @@
-{% extends 'baseTemplate.html' %}
+{% extends 'BaseTemplate.html' %}
 
 {% block content %}
 
-<section id="descripcion">
+<section id="banner-row-floating">
+  <section id="descripcion" class="d-flex justify-content-start">
     <div class="card descripcion">
-        <div class="card-header">
-            <h3>Terminos y Condiciones</h3>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-5">
-                    <h4>QUE JUAN SE LA COMA.</p><i style="font-size: 40px" class="fas fa-cogs"></i>
-                </div>
-                <div class="col-md-1"><i style="font-size: 40px" class="fas fa-headset"></i></div>
-            </div>
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-1"></div>
-            </div>
-        </div>
+      <div class="card-header">
+        <h3>Terminos y Condiciones</h3>
+      </div>
+      <div class="card-body text-left">
+        <h4 style="color: darkgreen;">¡Bienvenido/a a Detecta!</h4>
+        <ol>
+          <li>Al hacer uso de nuestros servicios, usted acepta cumplir con los presentes Términos y Condiciones, así como con las políticas y directrices de DETECTA que se publiquen en su sitio web. Si no está de acuerdo con estos términos, por favor absténgase de utilizar nuestros servicios.</li>
+
+          <li>Servicios de Asesoría y Capacitación: DETECTA ofrece servicios de asesoría y capacitación para el desarrollo de proyectos de innovación y emprendimientos de producción agrícola y pecuaria.</li>
+
+          <li>Confidencialidad: DETECTA se compromete a mantener la confidencialidad de la información que nos proporcione en el curso de nuestros servicios. Esto incluye, pero no se limita a, los detalles del proyecto, la información financiera, etc.</li>
+
+          <li>Limitación de Responsabilidad: DETECTA no será responsable por daños directos, indirectos, especiales, consecuentes o punitivos relacionados con el uso o la imposibilidad de usar nuestros servicios.</li>
+
+          <li>Modificaciones de los Términos y Condiciones: DETECTA se reserva el derecho de modificar estos Términos y Condiciones en cualquier momento y sin previo aviso. Los cambios entrarán en vigor a partir de su publicación en nuestro sitio web.</li>
+
+        </ol>
+        <p>Si tiene alguna pregunta sobre estos Términos y Condiciones, por favor contáctenos a través de nuestro sitio web o enviándonos un correo electrónico a info@detecta.com. También puede comunicarse con nosotros por teléfono al 85323707.</p>
+        <i style="font-size: 40px" class="fas fa-comments"></i>
+      </div>
     </div>
+  </section>
 </section>
 
 {% endblock %}
+

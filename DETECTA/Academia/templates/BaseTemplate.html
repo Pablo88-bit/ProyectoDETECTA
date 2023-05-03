@@ -20,8 +20,10 @@
 
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">
-    </script><script type="text/javascript" src="{% static 'js/hoja.js' %}"></script>
-    </script><script type="text/javascript" src="{% static 'js/nosotros.js' %}"></script>
+    </script>
+    <script type="text/javascript" src="{% static 'js/hoja.js' %}"></script>
+    </script>
+    <script type="text/javascript" src="{% static 'js/nosotros.js' %}"></script>
 
 
 
@@ -33,27 +35,28 @@
 
 <body>
 
-        <header>
-            <div id="logo">
-                <a href="#">
-                    <img src="/Academia/static/img/detecta.png" alt="Logo de la empresa">
-                </a>
-            </div>
-            <div id="nav">
-                <nav>
-                    <body>
-                        <ul>
-                            <li><a href="{% url 'index' %}">Inicio</a></li>
-                            <li><a href="{% url 'services' %}">Servicios</a></li>
-                            <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
-                            <li><a href="#">Contacto</a></li>
-                        </ul>
-                    </body>
+    <header>
+        <div id="logo">
+            <a href="#">
+                <img src="/Academia/static/img/detecta.png" alt="Logo de la empresa">
+            </a>
+        </div>
+        <div id="nav">
+            <nav="banner-row-floating">
+
+                <body>
+                    <ul>
+                        <li><a href="{% url 'index' %}">Inicio</a></li>
+                        <li><a href="{% url 'services' %}">Servicios</a></li>
+                        <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+                        <li><a href="#">Contacto</a></li>
+                    </ul>
+                </body>
                 </nav>
-            </div>
-        </header>
-    </section>
-    
+        </div>
+    </header>
+
+
     {% block content %}{% endblock %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js">    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
@@ -79,8 +82,8 @@
                 <h3>PRIVACIDAD</h3>
                 <ul>
                     <li><a href="{% url 'TerminosCondiciones' %}">Términos y condiciones</a></li>
-                    <li><a href="#">Política de privacidad</a></li>
-                    <li><a href="#">Aviso legal</a></li>
+                    <li><a href="{% url 'PoliticaPrivacidad' %}">Política de privacidad</a></li>
+                    <li><a href="{% url 'AvisoLegal' %}">Aviso legal</a></li>
                 </ul>
             </div>
             <div class="social-column">
@@ -104,4 +107,5 @@
         </div>
     </footer>
 </section>
+
 </html>
