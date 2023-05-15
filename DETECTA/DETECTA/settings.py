@@ -35,6 +35,8 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'jazzmin',#Importando las interfaces del sistema administrativo plugin Jazzmin
     'admin_interface',#Importando las interfaces del sistema administrativo
+    'import_export',#Impotando reportes
+    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -89,6 +91,11 @@ JAZZMIN_SETTINGS = {
         {   'type': 'url',
             'name': 'Inicio',
             'url': 'http://127.0.0.1:8000',
+            "icon": "fas fa-house",
+        },
+        {   'type': 'url',
+            'name': 'Graficos',
+            'url': 'http://127.0.0.1:8000/graficos/',
             "icon": "fas fa-house",
         }#,
         #{   'type': 'url',
@@ -200,6 +207,7 @@ STATIC_URL = '/Academia/static/'
 import os
 MEDIA_URL= '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

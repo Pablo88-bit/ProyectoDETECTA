@@ -1,11 +1,80 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
   
 
 
-
 {% block content %}
+<section id="banner-row-floating">
+  <video src="/Academia/static/img/FondoNosotros.mp4" autoplay loop muted></video>
+  <header>
+    <div id="logo">
+      <a href="http://127.0.0.1:8000/admin/login/">
+        <img src="/Academia/static/img/detecta.png" alt="Logo de la empresa">
+      </a>
+    </div>
+    <div id="nav">
+      <nav>
+        <ul>
+          <li><a href="{% url 'index' %}">Inicio</a></li>
+          <li><a href="{% url 'services' %}">Servicios</a></li>
+          <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+</section>
 
-<section id="history">
+
+<section id="descripcion">
+  <div class="card descripcion">
+      <div class="card-header">
+          <h3>Nosotros</h3>
+      </div>
+      <div class="card-body">
+          <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-5">
+                  <h4>Historia</h4>
+                  <p>Nuestra academia se fundó hace 10 años con el objetivo de
+                    brindar la mejor formación en tecnologías de la información a nuestros estudiantes. Desde
+                    entonces, hemos formado a cientos de profesionales que han tenido éxito en sus carreras.</p><i style="font-size: 40px" class="fas fa-book-open history-icon"></i>
+              </div>
+              <div class="col-md-5">
+                  <h4>Experiencia</h4>
+                  <p>Nuestros profesores tienen años de experiencia en el
+                    campo de la tecnología de la información, brindándoles a nuestros estudiantes la oportunidad de
+                    aprender de expertos en la materia.</p> <i style="font-size: 40px" class="fas fa-briefcase history-icon"></i>
+              </div>
+              <!--div class="col-md-1"><i style="font-size: 40px" class="fas fa-headset"></i></!div-->
+          </div>
+          <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-5">
+                  <h4>Logros</h4>
+                  <p>Hemos logrado varios reconocimientos a lo largo de
+                    los años, incluyendo premios por nuestro enfoque en la excelencia académica y nuestro compromiso
+                    con el éxito de nuestros estudiantes.</p><i style="font-size: 40px" class="fas fa-trophy history-icon"></i> 
+              </div>
+              <div class="col-md-5"></div>
+              <div class="col-md-1"></div>
+          </div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <div class="video-container">
+                  <iframe class="video" src="https://www.youtube.com/embed/RigGgaVKGJY?autoplay=1&showinfo=0" allowfullscreen></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+  </div>
+</section>
+
+
+
+<!--section id="history">
     <div class="container">
         <div class="row">
             <div class="col-8 text-center offset-md-2">
@@ -41,157 +110,113 @@
             </div>
         </div>
     </div>
+</!--section-->
+
+<!--section id="descripcion">
+  <div class="card descripcion">
+      <div class="card-header">
+          <h3>Docentes</h3>
+      </div>
+      <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
+
+                
+              <!-- Team Start >
+              <section id="main-slider">
+                <div class="main-slider">
+                  <div class="history-card maestroscard">
+                    <div class="container">
+                      <div class="row g-4">
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                          <div class="team-item position-relative rounded overflow-hidden">
+                            <div class="overflow-hidden">
+                              <img class="img-fluid" src="/Academia/static/img/trabajando1.jpg" alt="">
+                            </div>
+                            <div class="team-text bg-light text-center p-4">
+                              <h5>Full Name</h5>
+                              <p class="text-primary">Designation</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                          <div class="team-item position-relative rounded overflow-hidden">
+                            <div class="overflow-hidden">
+                              <img class="img-fluid" src="/Academia/static/img/trabajando1.jpg" alt="">
+                            </div>
+                            <div class="team-text bg-light text-center p-4">
+                              <h5>Full Name</h5>
+                              <p class="text-primary">Designation</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                          <div class="team-item position-relative rounded overflow-hidden">
+                            <div class="overflow-hidden">
+                              <img class="img-fluid" src="/Academia/static/img/trabajando1.jpg" alt="">
+                            </div>
+                            <div class="team-text bg-light text-center p-4">
+                              <h5>Full Name</h5>
+                              <p class="text-primary">Designation</p>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                          <div class="team-item position-relative rounded overflow-hidden">
+                            <div class="overflow-hidden">
+                              <img class="img-fluid" src="/Academia/static/img/profesor.jpeg" alt="">
+                            </div>
+                            <div class="team-text bg-light text-center p-4">
+                              <h5>Full Name</h5>
+                              <p class="text-primary">Designation</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <!-- Team End >
+
+            </div>
+          </div>
+          
+      </div>
+  </div>
+</section-->
+
+<section class="image-section">
+  <div class="row">
+    <div class="col-4">
+      <div class="card">
+        <div class="image-item">
+          <img src="/Academia/static/img/estudiar.jpg" alt="Imagen 1">
+          <h4 class="card-title">Título de la imagen 1</h4>
+          <p>Descripción de la imagen 1</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="image-item">
+          <img src="/Academia/static/img/estudiar.jpg" alt="Imagen 2">
+          <h4 class="card-title">Título de la imagen 2</h4>
+          <p>Descripción de la imagen 2</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="image-item">
+          <img src="/Academia/static/img/estudiar.jpg" alt="Imagen 3">
+          <h4 class="card-title">Título de la imagen 3</h4>
+          <p>Descripción de la imagen 3</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
-
-
-<section class="colaborators">
-    <div class="row">
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/mujer.jpg" alt="Foto del colaborador">
-                </div>
-                <div class="colaborator-info-container">
-                    <h3 class="colaborator-name">Nombre del colaborador</h3>
-                    <p class="colaborator-profession">Profesión</p>
-                    <p class="colaborator-description">Descripción</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/hombre2(2).jpg" alt="Foto del colaborador">
-                </div>
-                <div class="colaborator-info-container">
-                    <h3 class="colaborator-name">Nombre del colaborador</h3>
-                    <p class="colaborator-profession">Profesión</p>
-                    <p class="colaborator-description">Descripción</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/hombre2(2).jpg" alt="Foto del colaborador">
-                </div>
-                <div class="colaborator-info-container">
-                    <h3 class="colaborator-name">Nombre del colaborador</h3>
-                    <p class="colaborator-profession">Profesión</p>
-                    <p class="colaborator-description">Descripción</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/hombre2(2).jpg" alt="Foto del colaborador">
-                </div>
-                <div class="colaborator-info-container">
-                    <h3 class="colaborator-name">Nombre del colaborador</h3>
-                    <p class="colaborator-profession">Profesión</p>
-                    <p class="colaborator-description">Descripción</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/hombre2(2).jpg" alt="Foto del colaborador">
-                </div>
-                <div class="colaborator-info-container">
-                    <h3 class="colaborator-name">Nombre del colaborador</h3>
-                    <p class="colaborator-profession">Profesión</p>
-                    <p class="colaborator-description">Descripción</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-<section class="colaborators">
-    <div class="row">
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/mujer.jpg" alt="Foto del colaborador">
-                </div>
-                <div class="colaborator-info-container">
-                    <div class="colaborator-name">Nombre del colaborador</div>
-                    <div class="colaborator-profession">Profesión</div>
-                </div>
-                <div class="colaborator-description">Descripción</div>
-            </div>
-        </div>
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/Working.jpg" alt="Foto del colaborador">
-                </div>
-            <div class="colaborator-info-container">
-                <div class="colaborator-name">Nombre del colaborador</div>
-                <div class="colaborator-profession">Profesión</div>
-            </div>
-            <div class="colaborator-description">Descripción</div>
-            </div>
-        </div>
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/mujer.jpg" alt="Foto del colaborador">
-                </div>
-                <div class="colaborator-info-container">
-                    <div class="colaborator-name">Nombre del colaborador</div>
-                    <div class="colaborator-profession">Profesión</div>
-                </div>
-                <div class="colaborator-description">Descripción</div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/Working.jpg" alt="Foto del colaborador">
-                </div>
-                <div class="colaborator-info-container">
-                    <div class="colaborator-name">Nombre del colaborador</div>
-                    <div class="colaborator-profession">Profesión</div>
-                </div>
-                <div class="colaborator-description">Descripción</div>
-            </div>
-        </div>
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/mujer.jpg" alt="Foto del colaborador">
-                </div>
-                <div class="colaborator-info-container">
-                    <div class="colaborator-name">Nombre del colaborador</div>
-                    <div class="colaborator-profession">Profesión</div>
-                </div>
-                <div class="colaborator-description">Descripción</div>
-            </div>
-        </div>
-        <div class="col-md-4 col-bottom-margin">
-            <div class="colaborator-container">
-                <div class="colaborator-image-container">
-                    <img src="/Academia/static/img/Working.jpg" alt="Foto del colaborador">
-                </div>
-                <div class="colaborator-info-container">
-                    <div class="colaborator-name">Nombre del colaborador</div>
-                    <div class="colaborator-profession">Profesión</div>
-                </div>
-                <div class="colaborator-description">Descripción</div>
-            </div>
-        </div>
-    </div> 
-</section>           
 
 {% endblock %}

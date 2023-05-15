@@ -1,0 +1,89 @@
+/*Descripción de servicios*/
+
+
+#descripcion{
+    padding: 50px;
+    margin: 10px;
+}
+
+#descripcion .card {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin-bottom: 30px;
+    transition: all 0.3s ease-in-out;
+}
+ 
+#descripcion .card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 4px 30px rgba(0, 0, 0, 0.05);
+    transform: translateY(-10px);
+}
+
+#descripcion .card-header {
+    background-color: #f2f2f2;
+    padding: 30px;
+    border-bottom: 1px solid #ddd;
+    border-radius: 10px 10px 0 0;
+}
+
+#descripcion .card-header h3 {
+    margin: 0;
+    font-weight: bold;
+    color: #333;
+    font-size: 18px;
+}
+
+
+#descripcion .card-body {
+    padding: 30px;
+}
+
+#descripcion .card-body h4 {
+    margin-top: 30px;
+    font-weight: bold;
+    color: rgb(156, 189, 12);
+    font-size: 16px;
+}
+
+
+#descripcion .card-body p {
+    color: #555;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+
+/* Galeria de imagenes*/
+#galeria {
+    text-align: center;
+    padding: 50px 50px;
+    background-color: #f2f2f2;
+}
+
+#galeria h2 {
+    font-size: 2em;
+    margin: 0 0 20px;
+}
+
+#galeria .galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 0 -2px;
+}
+
+#galeria .galeria img {
+    width: 900px;
+    height: 300px;
+    max-width: 90%;
+    margin: 0 5px 20px;
+    object-fit: cover;
+    border-color: rgb(16, 252, 106);
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+#galeria .galeria img:hover {
+    transform: scale(1.1);
+}
