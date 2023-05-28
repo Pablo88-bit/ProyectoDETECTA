@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 import random
 from datetime import datetime
 
@@ -13,6 +14,8 @@ class Cursos(models.Model):
     numero_horas = models.IntegerField(null=False, verbose_name='Número de horas duración del curso')   
     image = models.ImageField(upload_to="Cursos", null=True, verbose_name="Imagen del curso")
     descripcion_cursos = models.CharField(max_length=500, null=True, verbose_name='Descripción del curso')
+    num_participantes_i = models.IntegerField(null=True, verbose_name='Número inicial de participantes')
+    num_participantes_f = models.IntegerField(null=True, verbose_name='Número final de participantes')
     observaciones_cursos = models.CharField(max_length=200, null=True, verbose_name='Observaciones', blank=True)
 
     # En lugar de hacer la tabla catalogo utilice una lista que fucionará como tabla catalogo
@@ -84,7 +87,7 @@ class MediosDidacticos(models.Model):
     nombre_medio = models.CharField(max_length=80, null=False, unique=True, verbose_name='Nombre del medio didactico')
     descripcion_medio = models.CharField(max_length=200, null=True, verbose_name='Descripcion', blank=True)
     cantidad = models.IntegerField(null=False, verbose_name='Cantidad')
-    precio = models.DecimalField(max_digits=12, decimal_places=2, null=False, verbose_name='Precio del producto') 
+    #precio = models.DecimalField(max_digits=12, decimal_places=2, null=False, verbose_name='Precio del producto') 
     unidad_Medida = models.CharField(max_length=100, null=False, verbose_name='Unidad/medida del producto')
     fecha_caducidad = models.DateField(null=False, verbose_name='Fecha de caducidad del producto')
     fecha_compra = models.DateField(null=False, verbose_name='Fecha de la compra del producto')
@@ -121,7 +124,7 @@ class Materiales(models.Model):
     nombre_material = models.CharField(max_length=80, null=False, unique=True, verbose_name='Nombre del material ')
     descripcion_material = models.CharField(max_length=200, null=True, verbose_name='Descripcion', blank=True)
     cantidadMat = models.IntegerField(null=False, verbose_name='Cantidad')
-    precioMat = models.DecimalField(max_digits=12, decimal_places=2, null=False, verbose_name='Precio del material')
+    #precioMat = models.DecimalField(max_digits=12, decimal_places=2, null=False, verbose_name='Precio del material')
     unidad_MedidaMat = models.CharField(max_length=120, null=False, verbose_name='Unidad/medida del material')
     fecha_caducidadMat = models.DateField(null=False, verbose_name='Fecha de caducidad')
     fecha_compraMat = models.DateField(null=False, verbose_name='Fecha de la compra del material')
@@ -341,31 +344,31 @@ class EmailProveedor(models.Model):
 
 # Con este modelo customizado seremos capaces de establecer la relación muhos a muchos
 class AlumnoCurso(models.Model):
-    alumno_id = models.ForeignKey(Alumnos, on_delete=models.CASCADE)
-    curso_id = models.ForeignKey(Cursos, on_delete=models.CASCADE)
-    num_participantes_i = models.IntegerField(null=False, verbose_name='Número inicial de participantes')
-    num_participantes_f = models.IntegerField(null=False, verbose_name='Número final de participantes')
+    alumno_id = models.ForeignKey(Alumnos, on_delete=models.CASCADE, verbose_name='Nombre del Alumno')
+    curso_id = models.ForeignKey(Cursos, on_delete=models.CASCADE, verbose_name='Nombre del Curso')
+    
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'AlumnoCurso'
         verbose_name = 'Matricula'
         verbose_name_plural = 'Matriculas'
 
-
 # Modelo Cursos Profesor(relacion muchos a muchos)
 class ProfesorCurso(models.Model):
-    profesor_id = models.ForeignKey(Profesor,on_delete=models.CASCADE)
-    cursos_id = models.ForeignKey(Cursos, on_delete=models.CASCADE)
+    profesor_id = models.ForeignKey(Profesor,on_delete=models.CASCADE, verbose_name='Nombre del Profesor')
+    cursos_id = models.ForeignKey(Cursos, on_delete=models.CASCADE, verbose_name='Nombre del Curso')
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'ProfesorCurso'
         verbose_name = 'Asignación de Curso'
         verbose_name_plural = 'Asignación de Cursos'
 
+
+
 # Modelo cursos Medios Didacticos(Relacion muchos a muchos)
 class MediosDidacticosCurso(models.Model):
-    mediosdidacticos_id = models.ForeignKey(MediosDidacticos, on_delete=models.CASCADE)
-    cursos_id = models.ForeignKey(Cursos, on_delete=models.CASCADE)
+    mediosdidacticos_id = models.ForeignKey(MediosDidacticos, on_delete=models.CASCADE, verbose_name='Medios Didácticos')
+    cursos_id = models.ForeignKey(Cursos, on_delete=models.CASCADE, verbose_name='Cursos')
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'MediosDidacticosCurso'
@@ -374,8 +377,8 @@ class MediosDidacticosCurso(models.Model):
 
 # Modelo Cursos Materiales(relacion muchos a muchos)
 class MaterialesCurso(models.Model):
-    materiales_id = models.ForeignKey(Materiales, on_delete=models.CASCADE)
-    cursosM_id = models.ForeignKey(Cursos, on_delete=models.CASCADE)
+    materiales_id = models.ForeignKey(Materiales, on_delete=models.CASCADE, verbose_name='Materiales')
+    cursosM_id = models.ForeignKey(Cursos, on_delete=models.CASCADE, verbose_name='Cursos')
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'MaterialesCurso'
@@ -384,8 +387,8 @@ class MaterialesCurso(models.Model):
 
 # Modelo Medios Didacticos Profesor(relacion muchos a muchos)
 class ProfesorMediosDidacticos(models.Model):
-    medios_didacticos_id =models.ForeignKey(MediosDidacticos, on_delete=models.CASCADE)
-    profe_id = models.ForeignKey(Profesor, on_delete=models.CASCADE)
+    medios_didacticos_id =models.ForeignKey(MediosDidacticos, on_delete=models.CASCADE, verbose_name='Medios Didácticos')
+    profe_id = models.ForeignKey(Profesor, on_delete=models.CASCADE, verbose_name='Nombre del Profesor')
     fecha_recibido = models.DateField(null=False, verbose_name='Fecha de recibido')
 
     # En lugar de hacer la tabla catalogo utilice una lista que fucionará como tabla catalogo
@@ -402,8 +405,8 @@ class ProfesorMediosDidacticos(models.Model):
 
 # Modelo Materiales Profesor(relacion muchos a muchos)
 class MaterialesProfesor(models.Model):
-    materiales_id = models.ForeignKey(Materiales, on_delete=models.CASCADE)
-    Profesor_id = models.ForeignKey(Profesor, on_delete=models.CASCADE)
+    materiales_id = models.ForeignKey(Materiales, on_delete=models.CASCADE, verbose_name='Materiales')
+    Profesor_id = models.ForeignKey(Profesor, on_delete=models.CASCADE, verbose_name='Nombre del Profesor')
     fecha_recibido = models.DateField(null=False, verbose_name='Fecha de recibido')
 
     # En lugar de hacer la tabla catalogo utilice una lista que fucionará como tabla catalogo
@@ -416,24 +419,24 @@ class MaterialesProfesor(models.Model):
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'ProfesorMateriales' 
         verbose_name = 'Asignación de Material'
-        verbose_name_plural = 'Asignación de Materiales'
+        verbose_name_plural = 'Asignación de Materiales' 
 
 # Modelo Medios Didacticos Proveedores(relacion muchos a muchos)
 class ProveedorMediosDidacticos(models.Model):
-    medios_didacticos_id = models.ForeignKey(MediosDidacticos, on_delete=models.CASCADE)
-    proveedor_id = models.ForeignKey(Proveedor,on_delete=models.CASCADE)
+    medios_didacticos_id = models.ForeignKey(MediosDidacticos, on_delete=models.CASCADE, verbose_name='Medios Didácticos')
+    proveedor_id = models.ForeignKey(Proveedor,on_delete=models.CASCADE, verbose_name='Nombre del Proveedor')
     fecha_compra = models.DateField(null=False, verbose_name='Fecha de compra')
     CantidadCompra = models.IntegerField(null=False, verbose_name='Cantidad Compra')
 
     class Meta:                   # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'ProveedorMediosDidacticos' 
         verbose_name = 'Compra de Medio Didáctico'
-        verbose_name_plural = 'Compra de Medios Didácticos'
+        verbose_name_plural = 'Compra de Medios Didácticos' 
 
 # Modelo Materiales Proveedores(relacion muchos a muchos)
 class ProveedorMateriales(models.Model):
-    materiales_id = models.ForeignKey(Materiales, on_delete=models.CASCADE)
-    proveedor_id = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
+    materiales_id = models.ForeignKey(Materiales, on_delete=models.CASCADE, verbose_name='Materiales')
+    proveedor_id = models.ForeignKey(Proveedor, on_delete=models.CASCADE, verbose_name='Nombre del Proveedor')
     fechacompra = models.DateField(null=False, verbose_name='Fecha de compra')
     Cantidad_Compra = models.IntegerField(null=False, verbose_name='Cantidad Compra')
 
@@ -443,7 +446,9 @@ class ProveedorMateriales(models.Model):
         verbose_name_plural = 'Compra de Materiales'
 
 
-
+class Temas(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    tema = models.CharField(max_length=50)
 
 
 # Funciones genera Documents únicos(carnet, códigos, etc...)

@@ -31,3 +31,4 @@ var thumbnails = new Splide('#thumbnail-slider', {
 main.sync(thumbnails);
 main.mount(); 
 thumbnails.mount();
+

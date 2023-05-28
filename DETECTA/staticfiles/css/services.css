@@ -54,6 +54,8 @@
 }
 
 
+
+
 /* Galeria de imagenes*/
 #galeria {
     text-align: center;
@@ -87,3 +89,142 @@
 #galeria .galeria img:hover {
     transform: scale(1.1);
 }
+
+
+
+
+
+
+#Carrucel {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    position: relative;
+}
+
+.card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1), 0 4px 30px rgba(0, 0, 0, 0.05);
+    transform: translateY(-10px);
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1), 0 2px 10px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+
+.card-header-carrucel {
+    background-color: #f2f2f2;
+    padding: 15px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.carousel-content {
+    background: linear-gradient(to bottom, rgba(248, 248, 248, 0.8), rgba(234, 234, 234, 0.8));
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.curso-descripcion {
+    text-align: center;
+}
+
+.btn-success {
+    border: 1px solid black;
+}
+
+.carousel-item {
+    height: 500px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: 1px; /* Ajusta el margen superior para que la imagen comience debajo del card-header-carrucel */
+}
+
+  
+  
+  
+/*
+.carousel-item {
+    display: none;
+  }
+  
+  .carousel-item.active {
+    display: block;
+  }
+  
+  .carousel-inner {
+    position: relative;
+  }
+  
+  .carousel-indicators {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .carousel-indicators li {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+  
+  .carousel-indicators li.active {
+    background-color: #333;
+  }
+  
+  .curso-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .curso-card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .curso-info {
+    text-align: center;
+  }
+  
+  .curso-nombre {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .curso-descripcion {
+    margin-top: 10px;
+  }
+  
+  .btn-success {
+    background-color: #28a745;
+    color: #fff;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838;
+  }
+  
+

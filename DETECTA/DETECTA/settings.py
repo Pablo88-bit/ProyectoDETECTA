@@ -33,10 +33,11 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'jazzmin',#Importando las interfaces del sistema administrativo plugin Jazzmin
-    'admin_interface',#Importando las interfaces del sistema administrativo
+    #'admin_interface',#Importando las interfaces del sistema administrativo(Plugin: pip install django_admin_interface)
+    'colorfield',#Importando los colores del sistema administrativo(Plugin: pip install django_admin_interface)
     'import_export',#Impotando reportes
-    'django_plotly_dash.apps.DjangoPlotlyDashConfig',
+    #'django_plotly_dash.apps.DjangoPlotlyDashConfig',#Graficos (Plugin: pip install django_plotly_dash )
+    'jazzmin',#Importando las interfaces del sistema administrativo plugin Jazzmin
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Academia',
-    'colorfield',#Importando los colores del sistema administrativo
 ]
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -52,7 +52,9 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 #Settings Jazzmin
 JAZZMIN_SETTINGS = {
-     # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "show_ui_builder": True, #El constructor de interfaz de usuario de Jazzmin
+
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "DETECTA",
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_header": 'DETECTA',
@@ -80,9 +82,9 @@ JAZZMIN_SETTINGS = {
     'Academia.AlumnoCurso': 'fas fa-graduation-cap',
     'auth.user': 'fas fa-user',
     'auth.group': 'fas fa-users',
-    'admin_interface.temes': 'fas fa-paint-brush'
+    'admin.interface': 'fas fa-paint-brush',
     },
-    
+
     "topmenu_links": [
         #{'app': 'Academia'},
         {'models': 'Academia.Alumnos.Alumnos'},
@@ -106,16 +108,37 @@ JAZZMIN_SETTINGS = {
     ]
 }
 
-JAZZMIN_UI_TWEAKS = {
-    "theme": "simplex",
-}
+#Sin terminar los temas
+#JAZZMIN_UI_TWEAKS = {
+#    "theme": "default",  # Tema predeterminado
+#    "dark_mode_theme": "darkly",  # Tema oscuro para el modo oscuro
+#    "themes": [
+#        ("cerulean", "Cerulean"),
+#        ("cosmo", "Cosmo"),
+#        ("flatly", "Flatly"),
+#        ("journal", "Journal"),
+#        ("litera", "Litera"),
+#        ("lumen", "Lumen"),
+#        ("lux", "Lux"),
+#        ("materia", "Materia"),
+#        ("minty", "Minty"),
+#        ("pulse", "Pulse"),
+#        ("sandstone", "Sandstone"),
+#        ("simplex", "Simplex"),
+#        ("sketchy", "Sketchy"),
+#        ("spacelab", "Spacelab"),
+#        ("united", "United"),
+#        ("yeti", "Yeti"),
+#    ],
+#}
+
 #JAZZMIN_UI_TWEAKS = {
     #"theme": "custom",
     #"show_switch_theme": True,  # permite al usuario cambiar entre temas
     #"custom_css": "css/custom.css",
 #}
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+#STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -125,6 +148,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #"Academia.middleware.AdminThemeMiddleware",#Sin terminar los temas
+    #'jazzmin.middleware.JazzminMiddleware',#Plugin Jazmin
 ]
 
 ROOT_URLCONF = 'DETECTA.urls'
@@ -190,7 +215,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'es'
 
-TIME_ZONE = 'UTC'
+LANGUAGES =[ ('es', 'Spanish') ]
+
+TIME_ZONE = 'America/Managua'
 
 USE_I18N = True
 
@@ -202,7 +229,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/Academia/static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 import os
 MEDIA_URL= '/media/'

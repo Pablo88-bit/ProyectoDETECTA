@@ -10,13 +10,32 @@ from .models import Cursos, Materiales, MediosDidacticos
 from .models import AlumnoCurso, ProfesorCurso, MaterialesCurso, MediosDidacticosCurso
 from .models import MaterialesProfesor, ProfesorMediosDidacticos
 from .models import ProveedorMateriales, ProveedorMediosDidacticos
-from django.shortcuts import render
-from django.urls import path
-from chartjs.views.lines import BaseLineChartView
+#from django.shortcuts import render
+#from django.urls import path
+#from chartjs.views.lines import BaseLineChartView
+#from django.contrib.auth.admin import GroupAdmin, UserAdmin
+#from jazzmin.admin import JazzminModelAdminGroup, JazzminModelAdminUser
+#from .models import Group, User
+from .models import Temas#Sin terminar los temas
 
+#Tener en cuenta list_display foreign key attributes para Listar datos de otro modelo
 
 # Register your models here.
 admin.site.site_header = "ACADEMIA DETECTA"
+
+#Sin terminar los temas
+class AdminThemeMiddleware:
+    def __init__(self, get_response):
+        self.get_response = get_response
+
+    def __call__(self, request):
+        if request.user.is_authenticated:
+            user_theme = Temas.objects.filter(user=request.user).first()
+            if user_theme:
+                request.session["user_theme"] = user_theme.tema
+
+        response = self.get_response(request)
+        return response
 
 #Vistas de Alumnos en el sistema
 #######################################################################################
@@ -80,10 +99,10 @@ class EmailAlumnoInline(admin.TabularInline):
 
 class AlumnoAdmin(ImportExportModelAdmin):
         resource_class = AlumnoResources
-        change_form_template = 'graficos.html'
+        #change_form_template = 'graficos.html'
 
         form = AlumnoForm
-        list_per_page = 6
+        list_per_page = 8
         list_display=('carnet_alumno', 'nombre_alumno', 'username_alumno', 'nacionalidad_alumno', 'codigo_nivel')
         search_fields=('carnet_alumno', 'nombre_alumno')
         list_filter=('nacionalidad_alumno', 'lugar_alumno')
@@ -94,20 +113,20 @@ class AlumnoAdmin(ImportExportModelAdmin):
         ] 
 
 
-        def change_view(self, request, object_id, form_url='', extra_context=None):
+        #def change_view(self, request, object_id, form_url='', extra_context=None):
                 # Obtener los datos para el gráfico
-                data = [10, 20, 30, 40, 50]
+        #        data = [10, 20, 30, 40, 50]
 
                 # Renderizar el gráfico utilizando la plantilla chartjs.html
-                chart = BaseLineChartView()
-                chart.set_labels(["Uno", "Dos", "Tres", "Cuatro", "Cinco"])
-                chart.add_dataset(data)
-                chart.build()
+        #        chart = BaseLineChartView()
+        #        chart.set_labels(["Uno", "Dos", "Tres", "Cuatro", "Cinco"])
+        #        chart.add_dataset(data)
+        #        chart.build()
 
-                extra_context = extra_context or {}
-                extra_context['chart'] = chart.get_context_data()
+        #        extra_context = extra_context or {}
+        #        extra_context['chart'] = chart.get_context_data()
 
-                return super().change_view(request, object_id, form_url=form_url, extra_context=extra_context)
+        #        return super().change_view(request, object_id, form_url=form_url, extra_context=extra_context)
 
         #Ocultando el eliminar
         def has_delete_permission(self, request, obj=None):
@@ -171,24 +190,24 @@ class EmailProfesorInline(admin.TabularInline):
 
 class ProfesorCursoInline(admin.TabularInline):
         model = ProfesorCurso
-        extra = 0
-        min_num = 1
+        extra = 1
+        min_num = 0
 
 class MaterialesProfesorInline(admin.TabularInline):
         model = MaterialesProfesor
-        extra = 0
-        min_num = 1
+        extra = 1
+        min_num = 0
 
 
 class ProfesorMediosDidacticosInline(admin.TabularInline):
         model = ProfesorMediosDidacticos
-        extra = 0
-        min_num = 1
+        extra = 1
+        min_num = 0
 
 class   ProfesorAdmin(ImportExportModelAdmin):
         resource_class = ProfesorResources
         form = ProfesorForm
-        list_per_page = 4
+        list_per_page = 8
         list_display=('carnet_teacher', 'nombre_teacher', 'Numero_cedula', 'sexo', 'nacionalidad_teacher', 'codigo_nivel')
         search_fields=('carnet_teacher', 'nombre_teacher')
         list_filter=('nacionalidad_teacher', 'sexo')
@@ -259,18 +278,18 @@ class EmailProveedorInline(admin.TabularInline):
 
 class ProveedorMediosDidacticosInline(admin.TabularInline):
         model = ProveedorMediosDidacticos
-        extra = 0
-        min_num = 1
+        extra = 1
+        min_num = 0
 
 class ProveedorMaterialesInline(admin.TabularInline):
         model = ProveedorMateriales
-        extra = 0
-        min_num = 1
+        extra = 1
+        min_num = 0
 
 class   ProveedorAdmin(ImportExportModelAdmin):
         resource_class = ProveedorResources
         form = ProveedorForm
-        list_per_page = 4
+        list_per_page = 8
         list_display=('codigo_proveedor', 'nombre_proveedor', 'calidad', 'direccion')
         search_fields=('codigo_proveedor', 'nombre_proveedor')
         list_filter=('nombre_proveedor', 'calidad')
@@ -322,24 +341,24 @@ class CursoForm(forms.ModelForm):
 
 class MediosDidacticosCursoInline(admin.TabularInline):
         model = MediosDidacticosCurso
-        extra = 0
-        min_num = 1
+        extra = 1
+        min_num = 0
 
 class MaterialesCursoInline(admin.TabularInline):
         model = MaterialesCurso
-        extra = 0
-        min_num = 1
+        extra = 1
+        min_num = 0
 
 
 class AlumnoCursoInline(admin.TabularInline):
         model = AlumnoCurso  
-        extra = 0
-        min_num = 1
+        extra = 1
+        min_num = 0
 
 class  CursoAdmin(ImportExportModelAdmin):
         resource_class = CursosResources
         form = CursoForm
-        list_per_page = 4
+        list_per_page = 8
         list_display=('codigo_curso', 'nombre_curso', 'image', 'codigo_especialidad')
         search_fields=('codigo_curso', 'nombre_curso')
         list_filter=('fecha_inicio', 'fecha_final')
@@ -396,7 +415,7 @@ class MaterialesForm(forms.ModelForm):
 class MaterialesAdmin(ImportExportModelAdmin):
         resource_class = MaterialesResources
         form = MaterialesForm
-        list_per_page = 4
+        list_per_page = 8
         list_display=('codigo_material', 'nombre_material', 'unidad_MedidaMat', 'costo_unitarioMat', 'costo_totalMat', 'cantidadMat')
         search_fields=('codigo_material', 'nombre_material')
         list_filter=('nombre_material', 'unidad_MedidaMat')
@@ -450,7 +469,7 @@ class MediosDidacticosForm(forms.ModelForm):
 class MediosDidacticosAdmin(ImportExportModelAdmin):
         resource_class = MediosDidacticosResources
         form = MediosDidacticosForm
-        list_per_page = 4
+        list_per_page = 8
         list_display=('codigo_medios', 'nombre_medio', 'unidad_Medida', 'costo_unitario', 'costo_total', 'estado_asignacion')
         search_fields=('codigo_medios', 'nombre_medio')
         list_filter=('estado_asignacion', 'unidad_Medida')
@@ -475,4 +494,25 @@ admin.site.register(MediosDidacticos, MediosDidacticosAdmin)
 #admin.site.register(ProveedorMateriales)
 #admin.site.register(ProveedorMediosDidacticos)
 
+#Custom Jazmin
+#@admin.register(Group)
+#class GroupAdmin(JazzminModelAdminGroup, GroupAdmin):
+#    pass
+
+#@admin.register(User)
+#class UserAdmin(JazzminModelAdminUser, UserAdmin):
+#    pass
+
+
+#@admin.register(Group)
+#class GroupAdmin(JazzminModelAdminGroup, GroupAdmin):
+#    list_display = ('name', 'permissions')
+#    list_filter = ('permissions',)
+#    search_fields = ('name',)
+
+#@admin.register(User)
+#class UserAdmin(JazzminModelAdminUser, UserAdmin):
+#    list_display = ('username', 'email', 'first_name', 'last_name', 'is_staff')
+#    list_filter = ('is_staff',)
+#    search_fields = ('username', 'email', 'first_name', 'last_name')
 

@@ -26,7 +26,11 @@ urlpatterns = [
 
 
 #Si esta en desarrollo las imagenes se suben ahí si es producción hay que montar un Enginec 
-if settings.DEBUG == True:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+#if settings.DEBUG == True:
+    #urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    #urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
