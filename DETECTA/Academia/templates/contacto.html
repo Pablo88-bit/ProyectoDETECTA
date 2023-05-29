@@ -1,0 +1,51 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+<section id="banner-row-floating">
+    <video src="/static/img/FondoContacto.mp4" autoplay loop muted></video>
+    <header>
+      <div id="logo">
+        <a href="http://127.0.0.1:8000/admin/login/">
+          <img src="/static/img/detecta.png" alt="Logo de la empresa">
+        </a>
+      </div>
+      <div id="nav">
+        <nav>
+          <ul>
+            <li><a href="{% url 'index' %}">Inicio</a></li>
+            <li><a href="{% url 'services' %}">Servicios</a></li>
+            <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
+            <li><a href="{% url 'contacto' %}">Contacto</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+</section>
+
+<section id="formulario-contacto">
+    <h2 >Más información</h2>
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <p>Novedades de productos. ¿Quieres ser el primero en enterarte de nuestros lanzamientos más recientes?
+          Al suscribirte, te mantendremos al día con las últimas actualizaciones sobre nuestros productos y servicios.
+          No te pierdas la oportunidad de estar a la vanguardia y descubrir lo que tenemos preparado para ti.
+        </p>
+      </div>
+      <div class="col-2"></div>
+    </div>
+    <h3 class="titulo-contacto">Contacto</h3>
+    <form action="enviar_formulario.php" method="POST">
+      <label for="nombre">Nombre completo:</label>
+      <input type="text" id="nombre" name="nombre" required>
+      
+      <label for="correo">Correo electrónico:</label>
+      <input type="email" id="correo" name="correo" required>
+      
+      <label for="celular">Número de celular:</label>
+      <input type="tel" id="celular" name="celular" required>
+      
+      <input type="submit" value="Enviar">
+    </form>
+</section>
+{% endblock %}

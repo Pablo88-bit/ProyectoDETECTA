@@ -2,11 +2,11 @@
 
 {% block content %}
 <section id="banner-row-floating">
-    <video src="/Academia/static/img/FondoServicios.mp4" autoplay loop muted></video>
+    <video src="/static/img/FondoServicios.mp4" autoplay loop muted></video>
     <header>
       <div id="logo">
         <a href="http://127.0.0.1:8000/admin/login/">
-          <img src="/Academia/static/img/detecta.png" alt="Logo de la empresa">
+          <img src="/static/img/detecta.png" alt="Logo de la empresa">
         </a>
       </div>
       <div id="nav">
@@ -15,7 +15,7 @@
             <li><a href="{% url 'index' %}">Inicio</a></li>
             <li><a href="{% url 'services' %}">Servicios</a></li>
             <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
-            <li><a href="#">Contacto</a></li>
+            <li><a href="{% url 'contacto' %}">Contacto</a></li>
           </ul>
         </nav>
       </div>
@@ -148,24 +148,24 @@
     <div class="galeria">
         <div class="row">
             <div class="col-4">
-                <img src="/Academia/static/img/portada2.jpg" alt="Image 1">
+                <img src="/static/img/portada2.jpg" alt="Image 1">
             </div>
             <div class="col-4">
-                <img src="/Academia/static/img/estudiar2.jpg" alt="Image 2">
+                <img src="/static/img/estudiar2.jpg" alt="Image 2">
             </div>
             <div class="col-4">
-                <img src="/Academia/static/img/estudiar3.jpg" alt="Image 3">
+                <img src="/static/img/estudiar3.jpg" alt="Image 3">
             </div>
         </div>
         <div class="row">
             <div class="col-4">
-                <img src="/Academia/static/img/hombre2(2).jpg" alt="Image 4">
+                <img src="/static/img/hombre2(2).jpg" alt="Image 4">
             </div>
             <div class="col-4">
-                <img src="/Academia/static/img/Estudiantes.jpg" alt="Image 5">
+                <img src="/static/img/Estudiantes.jpg" alt="Image 5">
             </div>
             <div class="col-4">
-                <img src="/Academia/static/img/trabajando1.jpg" alt="Image 6">
+                <img src="/static/img/trabajando1.jpg" alt="Image 6">
             </div>
         </div>
     </div>

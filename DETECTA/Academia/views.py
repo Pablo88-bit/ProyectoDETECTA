@@ -23,6 +23,10 @@ def services(request):
 def nosotros(request):
     return render(request, 'nosotros.html')
 
+
+def contacto(request):
+    return render(request, 'contacto.html')
+
 #Sin terminar los temas
 def change_theme(request):
     if request.method == "POST":

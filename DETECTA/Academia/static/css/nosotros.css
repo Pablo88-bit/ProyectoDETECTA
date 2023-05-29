@@ -1,4 +1,8 @@
 /* Estilo para el efecto hover */
+.video-section{
+  background-color: #f2f2f2;
+  padding: 50px;
+}
 
 .video-container {
   margin-top: 50px;
@@ -39,7 +43,7 @@
   /*Nuevo*/
   .image-section {
     background-color: #f2f2f2;
-    margin-top: 50px;
+    /*margin-top: 50px;*/
     padding: 30px;
   }
 

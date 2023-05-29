@@ -4,11 +4,11 @@
 
 {% block content %}
 <section id="banner-row-floating">
-  <video src="/Academia/static/img/FondoNosotros.mp4" autoplay loop muted></video>
+  <video src="/static/img/FondoNosotros.mp4" autoplay loop muted></video>
   <header>
     <div id="logo">
       <a href="http://127.0.0.1:8000/admin/login/">
-        <img src="/Academia/static/img/detecta.png" alt="Logo de la empresa">
+        <img src="/static/img/detecta.png" alt="Logo de la empresa">
       </a>
     </div>
     <div id="nav">
@@ -17,7 +17,7 @@
           <li><a href="{% url 'index' %}">Inicio</a></li>
           <li><a href="{% url 'services' %}">Servicios</a></li>
           <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
-          <li><a href="#">Contacto</a></li>
+          <li><a href="{% url 'contacto' %}">Contacto</a></li>
         </ul>
       </nav>
     </div>
@@ -58,19 +58,22 @@
               <div class="col-md-5"></div>
               <div class="col-md-1"></div>
           </div>
-
-          <div class="container">
-            <div class="row">
-              <div class="col-12">
-                <div class="video-container">
-                  <iframe class="video" src="https://www.youtube.com/embed/RigGgaVKGJY?autoplay=1&showinfo=0" allowfullscreen></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
       </div>
   </div>
 </section>
+
+<section class="video-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="video-container">
+          <iframe class="video" src="https://www.youtube.com/embed/RigGgaVKGJY?autoplay=1&showinfo=0" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 
 
@@ -191,7 +194,7 @@
     <div class="col-4">
       <div class="card">
         <div class="image-item">
-          <img src="/Academia/static/img/estudiar.jpg" alt="Imagen 1">
+          <img src="/static/img/estudiar.jpg" alt="Imagen 1">
           <h4 class="card-title">Título de la imagen 1</h4>
           <p>Descripción de la imagen 1</p>
         </div>
@@ -200,7 +203,7 @@
     <div class="col-4">
       <div class="card">
         <div class="image-item">
-          <img src="/Academia/static/img/estudiar.jpg" alt="Imagen 2">
+          <img src="/static/img/estudiar.jpg" alt="Imagen 2">
           <h4 class="card-title">Título de la imagen 2</h4>
           <p>Descripción de la imagen 2</p>
         </div>
@@ -209,7 +212,7 @@
     <div class="col-4">
       <div class="card">
         <div class="image-item">
-          <img src="/Academia/static/img/estudiar.jpg" alt="Imagen 3">
+          <img src="/static/img/estudiar.jpg" alt="Imagen 3">
           <h4 class="card-title">Título de la imagen 3</h4>
           <p>Descripción de la imagen 3</p>
         </div>
