@@ -27,6 +27,20 @@ def nosotros(request):
 def contacto(request):
     return render(request, 'contacto.html')
 
+
+
+#Enlaces del Footer
+def procesos(request):
+    return render(request, 'procesos.html')    
+
+
+def terminos(request):
+    return render(request, 'terminos.html')
+
+
+def politica(request):
+    return render(request, 'politica.html')
+
 #Sin terminar los temas
 def change_theme(request):
     if request.method == "POST":

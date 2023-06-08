@@ -119,7 +119,8 @@ body {
 
 /* footer */
 #footer {
-    background-color: rgba(61, 8, 184, 0.678);
+    background-color: rgb(3, 105, 124);
+    /*background-color: rgba(61, 8, 184, 0.678);*/
     /*background-color: rgba(241, 26, 98, 0.678); ES UN ROSADO TUANI XD*/
     text-shadow: -1px 0 black, 0 1px black, 1px black, 0 -1px black;
     color: #fff;
@@ -161,6 +162,7 @@ body {
 
 #footer a {
     color: #fff;
+    text-shadow: -1px 0 black, 0 1px black, 1px black, 0 -1px black;
     text-decoration: none;
     transition: color 0.2s;
 }
@@ -184,3 +186,9 @@ body {
     margin-right: 10px;
 }
   
+
+
+/*Menu de navegación de los enlaces del footer*/
+#navbarNav a:hover {
+    color: #333;
+}

@@ -13,17 +13,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
         integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     
-    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles2.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/services.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/nosotros.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/contacto.css' %}">
 
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js">
     </script><script type="text/javascript" src="{% static 'js/hoja.js' %}"></script>
     </script><script type="text/javascript" src="{% static 'js/nosotros.js' %}"></script>
-
-
 
 
     <title>ACADEMIA DETECTA</title>
@@ -32,31 +35,34 @@
 </head>
 
 <body>
-    <section id="banner-row-floating" style="background-image: url('../static/img/estudiar5.jpg');">
-        <header>
-            <div id="logo">
-                <a href="http://127.0.0.1:8000/admin/login/">
-                    <img src="/static/img/detecta.png" alt="Logo de la empresa">
-                </a>
-            </div>
-            <div id="nav">
-                <nav>
-                    <ul>
-                        <li><a href="{% url 'index' %}">Inicio</a></li>
-                        <li><a href="{% url 'services' %}">Servicios</a></li>
-                        <li><a href="{% url 'nosotros' %}">Nosotros</a></li>
-                        <li><a href="{% url 'contacto' %}">Contacto</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </header>
-        <section id="hero">
-            <h1>Bienvenido a nuestra página web</h1>
-            <p>Empresa líder en capacitación en línea en el sector agropecuario.</p>
-            <a href="{% url 'services' %}" class="btn btn-outline-success">Ver Servicios</a>
-        </section>
-    </section>
-
+    <!--nav class="navbar navbar-expand-lg bg-body-tertiary"-->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: rgb(3, 105, 124);">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="margin-left: 40px;">
+                <img src="/static/img/detecta.png" alt="Logo de la empresa" width="120" height="80" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'index' %}" style="color: white; font-size: 20px; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'services' %}" style="color: white; font-size: 20px; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'nosotros' %}" style="color: white; font-size: 20px; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;">Nosotros</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'contacto' %}" style="color: white; font-size: 20px; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;;">Contacto</a>
+                    </li>
+                </ul>
+            </div>            
+        </div>
+    </nav>
+    
     
     {% block content %}{% endblock %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js">    </script>
@@ -108,7 +114,7 @@
                         </a>
                     </li>
                 </ul>
-            </div>            
+            </div>
         </div>
     </footer>
 </section>

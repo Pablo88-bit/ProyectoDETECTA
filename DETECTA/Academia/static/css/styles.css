@@ -111,7 +111,8 @@ body {
 
 /* footer */
 #footer {
-    background-color: rgba(61, 8, 184, 0.678);
+    background-color: rgb(3, 105, 124);
+    /*background-color: rgba(61, 8, 184, 0.678);*/
     /*background-color: rgba(241, 26, 98, 0.678); ES UN ROSADO TUANI XD*/
     text-shadow: -1px 0 black, 0 1px black, 1px black, 0 -1px black;
     color: #fff;
