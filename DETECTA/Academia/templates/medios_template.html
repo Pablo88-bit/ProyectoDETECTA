@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lista de Medios Didácticos</title>
+</head>
+<body>
+
+    <div class="table-container">
+        <h1>Lista de Medios Didácticos</h1>
+        <table style="text-align: justify">
+            <thead>
+                <tr>
+                    <th>Código Medios Didácticos</th>
+                    <th>Nombre del Medio Didáctico</th>
+                    <th>Unidad de Medida</th>
+                    <th>Fecha de Compra</th>
+                    <th>Costo Total</th>
+                    <th>Costo Unitario</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for medio in medios %}
+                <tr>
+                    <td>{{ medio.codigo_medios }}</td>
+                    <td>{{ medio.nombre_medio }}</td>
+                    <td>{{ medio.unidad_Medida }}</td>
+                    <td>{{ medio.fecha_compra }}</td>
+                    <td>{{ medio.costo_total }}</td>
+                    <td>{{ medio.costo_unitario }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>

@@ -10,7 +10,5 @@ urlpatterns = [
     path('procesos/', views.procesos, name="procesos"),
     path('terminos/', views.terminos, name="terminos"),
     path('politica/', views.politica, name="politica"),
-    path('graficos/', views.graficos, name="graficos"),
-    path("change-theme/", views.change_theme, name="change_theme"),
     #path('the_django_plotly_dash/', include('django_plotly_dash.urls', namespace='the_django_plotly_dash')),
 ]

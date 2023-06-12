@@ -10,6 +10,9 @@ from .models import Cursos, Materiales, MediosDidacticos
 from .models import AlumnoCurso, ProfesorCurso, MaterialesCurso, MediosDidacticosCurso
 from .models import MaterialesProfesor, ProfesorMediosDidacticos
 from .models import ProveedorMateriales, ProveedorMediosDidacticos
+from .models import PDFConfig
+import random
+from datetime import datetime
 #from django.shortcuts import render
 #from django.urls import path
 #from chartjs.views.lines import BaseLineChartView
@@ -17,6 +20,11 @@ from .models import ProveedorMateriales, ProveedorMediosDidacticos
 #from jazzmin.admin import JazzminModelAdminGroup, JazzminModelAdminUser
 #from .models import Group, User
 from .models import Temas#Sin terminar los temas
+#Reportes PDF
+from django.http import HttpResponse
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+
 
 #Tener en cuenta list_display foreign key attributes para Listar datos de otro modelo
 
@@ -86,9 +94,32 @@ class AlumnoResources(resources.ModelResource):
                 fields = ('carnet_alumno', 'nombre_alumno', 'curso', 'username_alumno', 'lugar_alumno', 'nacionalidad_alumno', 'fechanac_alumno', 'codigo_nivel_display', 'telefono_alumno')#, 'codigo_tipo_display', 'codigo_empresa_display')
                 export_order = fields
 
+#Generar Carnet Alumno
+def generar_carnet_alumno():
+    # Generar el código del alumno
+    # Utilizar el año actual
+    year = datetime.now().year
+    # Generar números aleatorios
+    random_numbers = random.randint(1000, 9999)
+    # Combinar los elementos en el código del alumno
+    carnet = f"{year}-{random_numbers}ED"
+    # Devolver el código del alumno
+    return carnet
+
+generar_carnet_alumno.short_description = "Generar código de alumno"
+
+
+
 
 class AlumnoForm(forms.ModelForm):
-        carnet_alumno = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 11}))
+        #carnet_alumno = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 11}))
+        carnet_alumno = forms.CharField(initial=generar_carnet_alumno())
+
+        def get_initial_for_field(self, field, field_name):
+                if field_name == 'carnet_alumno':
+                        return generar_carnet_alumno()
+                return super().get_initial_for_field(field, field_name)
+        
 
 class TelefonoAlumnoInline(admin.TabularInline):
         model = TelefonoAlumno
@@ -105,13 +136,45 @@ class AlumnoAdmin(ImportExportModelAdmin):
         list_per_page = 8
         list_display=('carnet_alumno', 'nombre_alumno', 'username_alumno', 'nacionalidad_alumno', 'codigo_nivel')
         search_fields=('carnet_alumno', 'nombre_alumno')
+        #list_filter=('fechanac_alumno', )
         list_filter=('nacionalidad_alumno', 'lugar_alumno')
-        #filter_horizontal = ('carnet_alumno', 'nombre_alumno')
+        #filter_vertical = ('carnet_alumno', 'fechanac_alumno')
+        #filter_horizontal = ('cursos', )
         inlines = [
                 TelefonoAlumnoInline,
                 EmailAlumnoInline,
         ] 
 
+        #Generar carnet
+        actions = [generar_carnet_alumno]
+
+        #Generar pdf alumno
+        def generate_pdf(modeladmin, request, queryset):
+                # Obtener la plantilla HTML
+                template = get_template('alumnos_template.html')
+                
+                # Datos para generar el PDF
+                context = {
+                        'alumnos': queryset
+                }
+                
+                # Renderizar la plantilla HTML con los datos
+                rendered_template = template.render(context)
+                
+                # Crear el objeto HttpResponse con el contenido PDF generado
+                response = HttpResponse(content_type='application/pdf')
+                response['Content-Disposition'] = 'attachment; filename="alumnos.pdf"'
+                
+                # Convertir el contenido HTML a PDF
+                pisa_status = pisa.CreatePDF(rendered_template, dest=response)
+                
+                # Si se generó correctamente el PDF, retornar el objeto HttpResponse
+                if pisa_status.err:
+                        return HttpResponse('Error al generar el PDF', status=500)
+                return response
+
+
+        actions = [generate_pdf]
 
         #def change_view(self, request, object_id, form_url='', extra_context=None):
                 # Obtener los datos para el gráfico
@@ -178,9 +241,30 @@ class ProfesorResources(resources.ModelResource):
                 exclude = ('id', 'materiales', 'mediosdidacticos', 'cursos')
                 export_order = ('carnet_teacher', 'nombre_teacher', 'fechanac_teacher', 'Numero_cedula', 'lugarOrigen_teacher', 'nacionalidad_teacher', 'image', 'descripcion_profesor', 'Referencias_profecionales', 'codigo_nivel', 'sexo')
 
+#Generar Carnet Profesor
+def generar_carnet_profesor():
+    # Generar el código del profesor
+    # Utilizar el año actual
+    year = datetime.now().year
+    # Generar números aleatorios
+    random_numbers = random.randint(1000, 9999)
+    # Combinar los elementos en el código del profesor
+    carnet = f"{year}-{random_numbers}PD"
+    # Devolver el código del profesor
+    return carnet
+
+generar_carnet_profesor.short_description = "Generar código de profesor"
+
 
 class ProfesorForm(forms.ModelForm):
-        carnet_teacher = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 11}))
+        #carnet_teacher = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 11}))
+        carnet_teacher = forms.CharField(initial=generar_carnet_profesor())
+
+        def get_initial_for_field(self, field, field_name):
+                if field_name == 'codigo_profesor':
+                        return generar_carnet_profesor()
+                return super().get_initial_for_field(field, field_name)
+
 
 class TelefonoProfesorInline(admin.TabularInline):
         model = TelefonoProfesor
@@ -218,6 +302,27 @@ class   ProfesorAdmin(ImportExportModelAdmin):
                 MaterialesProfesorInline,
                 ProfesorMediosDidacticosInline,
         ]
+
+        #Generar carnet profesor
+        actions = [generar_carnet_profesor]
+
+        #Generar pdf profesor
+        def generate_pdf(self, request, queryset):
+                template = get_template('profesor_template.html')
+                context = {
+                'profesores': queryset
+                }
+                rendered_template = template.render(context)
+                response = HttpResponse(content_type='application/pdf')
+                response['Content-Disposition'] = 'attachment; filename="profesores.pdf"'
+                pisa_status = pisa.CreatePDF(rendered_template, dest=response)
+                if pisa_status.err:
+                        return HttpResponse('Error al generar el PDF', status=500)
+                return response
+
+        generate_pdf.short_description = 'Generar PDF'
+
+        actions = ['generate_pdf']
 
         #Ocultando el eliminar
         def has_delete_permission(self, request, obj=None):
@@ -266,9 +371,30 @@ class ProveedorResources(resources.ModelResource):
                 exclude = ('id', 'materials', 'mediosdidactcos',)
                 export_order = ('codigo_proveedor', 'nombre_proveedor', 'descripcion_proveedor', 'calidad', 'direccion', 'observacion', 'material', 'medio')
 
+#Generar Código Proveedor
+def generar_codigo_proveedor():
+    # Generar el código del proveedor
+    # Utilizar el año actual
+    year = datetime.now().year
+    # Generar números aleatorios
+    random_numbers = random.randint(1000, 9999)
+    # Combinar los elementos en el código del proveedor
+    codigo = f"{year}-{random_numbers}PRD"
+    # Devolver el código del proveedor
+    return codigo
+
+generar_codigo_proveedor.short_description = "Generar código de proveedor"
+
 
 class ProveedorForm(forms.ModelForm):
-        codigo_proveedor = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 12}))
+        #codigo_proveedor = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 12}))
+        codigo_proveedor = forms.CharField(initial=generar_codigo_proveedor())
+
+        def get_initial_for_field(self, field, field_name):
+                if field_name == 'codigo_proveedor':
+                        return generar_codigo_proveedor()
+                return super().get_initial_for_field(field, field_name)
+
 
 class TelefonoProveedorInline(admin.TabularInline):
         model = TelefonoProveedor
@@ -299,6 +425,27 @@ class   ProveedorAdmin(ImportExportModelAdmin):
                 ProveedorMediosDidacticosInline,
                 ProveedorMaterialesInline,
         ]
+
+        #Generar código proveedor
+        actions = [generar_codigo_proveedor]
+
+        #Generar pdf proveedor
+        def generate_pdf(self, request, queryset):
+                template = get_template('proveedor_template.html')
+                context = {
+                'proveedores': queryset
+                }
+                rendered_template = template.render(context)
+                response = HttpResponse(content_type='application/pdf')
+                response['Content-Disposition'] = 'attachment; filename="proveedores.pdf"'
+                pisa_status = pisa.CreatePDF(rendered_template, dest=response)
+                if pisa_status.err:
+                        return HttpResponse('Error al generar el PDF', status=500)
+                return response
+
+        generate_pdf.short_description = 'Generar PDF'
+
+        actions = ['generate_pdf']
 
         #Ocultando el eliminar
         def has_delete_permission(self, request, obj=None):
@@ -335,9 +482,30 @@ class CursosResources(resources.ModelResource):
                 fields = ('codigo_curso', 'nombre_curso', 'fecha_inicio', 'fecha_final', 'numero_horas', 'descripcion_cursos', 'observaciones_cursos', 'especialidad')
                 export_order = fields
 
+#Generar Código Curso
+def generar_codigo_curso():
+    # Generar el código del curso
+    # Utilizar el año actual
+    year = datetime.now().year
+    # Generar números aleatorios
+    random_numbers = random.randint(1000, 9999)
+    # Combinar los elementos en el código del curso
+    codigo = f"{year}-{random_numbers}CD"
+    # Devolver el código del curso
+    return codigo
+
+generar_codigo_curso.short_description = "Generar código de curso"
+
 
 class CursoForm(forms.ModelForm):
-        codigo_curso = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 11}))
+        #codigo_curso = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 11}))
+        codigo_curso = forms.CharField(initial=generar_codigo_curso())
+
+        def get_initial_for_field(self, field, field_name):
+                if field_name == 'codigo_curso':
+                        return generar_codigo_curso()
+                return super().get_initial_for_field(field, field_name)
+
 
 class MediosDidacticosCursoInline(admin.TabularInline):
         model = MediosDidacticosCurso
@@ -368,6 +536,27 @@ class  CursoAdmin(ImportExportModelAdmin):
                 MaterialesCursoInline,
                 AlumnoCursoInline,
         ]
+
+        #Generar código curso
+        actions = [generar_codigo_curso]
+
+        #Generar pdf cursos
+        def generate_pdf(self, request, queryset):
+                template = get_template('cursos_template.html')
+                context = {
+                'cursos': queryset
+                }
+                rendered_template = template.render(context)
+                response = HttpResponse(content_type='application/pdf')
+                response['Content-Disposition'] = 'attachment; filename="cursos.pdf"'
+                pisa_status = pisa.CreatePDF(rendered_template, dest=response)
+                if pisa_status.err:
+                        return HttpResponse('Error al generar el PDF', status=500)
+                return response
+
+        generate_pdf.short_description = 'Generar PDF'
+
+        actions = ['generate_pdf']
 
         #Ocultando el eliminar
         def has_delete_permission(self, request, obj=None):
@@ -408,9 +597,29 @@ class MaterialesResources(resources.ModelResource):
                 fields = ('codigo_material', 'nombre_material', 'descripcion_material', 'cantidadMat', 'precioMat', 'unidad_MedidaMat', 'fecha_caducidadMat', 'fecha_compraMat', 'costo_totalMat', 'costo_unitarioMat', 'cursos')
                 export_order = fields
 
+#Generar Código Material
+def generar_codigo_material():
+    # Generar el código del material
+    # Utilizar el año actual
+    year = datetime.now().year
+    # Generar números aleatorios
+    random_numbers = random.randint(1000, 9999)
+    # Combinar los elementos en el código del material
+    codigo = f"{year}-{random_numbers}MTD"
+    # Devolver el código del material
+    return codigo
+
+generar_codigo_material.short_description = "Generar código de material"
+
 
 class MaterialesForm(forms.ModelForm):
-        codigo_material = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 12}))
+        #codigo_material = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 12}))
+        codigo_material = forms.CharField(initial=generar_codigo_material())
+
+        def get_initial_for_field(self, field, field_name):
+                if field_name == 'codigo_material':
+                        return generar_codigo_material()
+                return super().get_initial_for_field(field, field_name)
 
 class MaterialesAdmin(ImportExportModelAdmin):
         resource_class = MaterialesResources
@@ -419,6 +628,28 @@ class MaterialesAdmin(ImportExportModelAdmin):
         list_display=('codigo_material', 'nombre_material', 'unidad_MedidaMat', 'costo_unitarioMat', 'costo_totalMat', 'cantidadMat')
         search_fields=('codigo_material', 'nombre_material')
         list_filter=('nombre_material', 'unidad_MedidaMat')
+        list_filter=('fecha_compraMat', 'cantidadMat')
+
+        #Generar código de material
+        actions = [generar_codigo_material]
+
+        #Generar pdf materiales
+        def generate_pdf(self, request, queryset):
+                template = get_template('materiales_template.html')
+                context = {
+                'materiales': queryset
+                }
+                rendered_template = template.render(context)
+                response = HttpResponse(content_type='application/pdf')
+                response['Content-Disposition'] = 'attachment; filename="materiales.pdf"'
+                pisa_status = pisa.CreatePDF(rendered_template, dest=response)
+                if pisa_status.err:
+                        return HttpResponse('Error al generar el PDF', status=500)
+                return response
+
+        generate_pdf.short_description = 'Generar PDF'
+
+        actions = ['generate_pdf']
 
         #Ocultando el eliminar
         def has_delete_permission(self, request, obj=None):
@@ -461,10 +692,29 @@ class MediosDidacticosResources(resources.ModelResource):
                 exclude = ('id')
                 export_order = ('codigo_medios', 'nombre_medio', 'descripcion_medio', 'cantidad', 'precio', 'unidad_Medida', 'fecha_caducidad', 'fecha_compra', 'costo_total', 'costo_unitario', 'estado_asignacion','curso')
 
+#Generar Código Medio Didáctico
+def generar_codigo_medio_didactico():
+    # Generar el código del medio didáctico
+    # Utilizar el año actual
+    year = datetime.now().year
+    # Generar números aleatorios
+    random_numbers = random.randint(1000, 9999)
+    # Combinar los elementos en el código del medio didáctico
+    codigo = f"{year}-{random_numbers}MDD"
+    # Devolver el código del medio didáctico
+    return codigo
+
+generar_codigo_medio_didactico.short_description = "Generar código de medio didáctico"
+
 
 class MediosDidacticosForm(forms.ModelForm):
-        codigo_medios = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 12}))
+        #codigo_medios = forms.CharField(widget=forms.TextInput(attrs={'maxlength': 12}))
+        codigo_medios = forms.CharField(initial=generar_codigo_medio_didactico())
 
+        def get_initial_for_field(self, field, field_name):
+                if field_name == 'codigo_medio_didactico':
+                        return generar_codigo_medio_didactico()
+                return super().get_initial_for_field(field, field_name)
 
 class MediosDidacticosAdmin(ImportExportModelAdmin):
         resource_class = MediosDidacticosResources
@@ -473,6 +723,27 @@ class MediosDidacticosAdmin(ImportExportModelAdmin):
         list_display=('codigo_medios', 'nombre_medio', 'unidad_Medida', 'costo_unitario', 'costo_total', 'estado_asignacion')
         search_fields=('codigo_medios', 'nombre_medio')
         list_filter=('estado_asignacion', 'unidad_Medida')
+
+        #Generar código de medio didáctico
+        actions = [generar_codigo_medio_didactico]
+
+        #Generar pdf medios didácticos
+        def generate_pdf(self, request, queryset):
+                template = get_template('medios_template.html')
+                context = {
+                'medios': queryset
+                }
+                rendered_template = template.render(context)
+                response = HttpResponse(content_type='application/pdf')
+                response['Content-Disposition'] = 'attachment; filename="medios.pdf"'
+                pisa_status = pisa.CreatePDF(rendered_template, dest=response)
+                if pisa_status.err:
+                        return HttpResponse('Error al generar el PDF', status=500)
+                return response
+
+        generate_pdf.short_description = 'Generar PDF'
+
+        actions = ['generate_pdf']
 
         #Ocultando el eliminar
         def has_delete_permission(self, request, obj=None):

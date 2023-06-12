@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lista de Proveedores</title>
+</head>
+<body>
+
+    <div class="table-container">
+        <h1>Lista de Proveedores</h1>
+        <table style="text-align: justify">
+            <thead>
+                <tr>
+                    <th>Código del Proveedor</th>
+                    <th>Nombre del Proveedor</th>
+                    <th>Calidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for proveedor in proveedores %}
+                <tr>
+                    <td>{{ proveedor.codigo_proveedor }}</td>
+                    <td>{{ proveedor.nombre_proveedor }}</td>
+                    <td>{{ proveedor.get_calidad_display }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

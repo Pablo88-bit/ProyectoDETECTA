@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lista de Profesores</title>
+</head>
+<body>
+
+    <div class="table-container">
+        <h1>Lista de Profesores</h1>
+        <table style="text-align: justify">
+            <thead>
+                <tr>
+                    <th>Carnet del Profesor</th>
+                    <th>Nombre del Profesor</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Número de Cédula</th>
+                    <th>Nacionalidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for profesor in profesores %}
+                <tr>
+                    <td>{{ profesor.carnet_teacher }}</td>
+                    <td>{{ profesor.nombre_teacher }}</td>
+                    <td>{{ profesor.fechanac_teacher }}</td>
+                    <td>{{ profesor.Numero_cedula }}</td>
+                    <td>{{ profesor.nacionalidad_teacher }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

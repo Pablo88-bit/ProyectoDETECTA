@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lista de Materiales</title>
+</head>
+<body>
+
+    <div class="table-container">
+        <h1>Lista de Materiales</h1>
+        <table style="text-align: justify">
+            <thead>
+                <tr>
+                    <th>Código Material</th>
+                    <th>Nombre Material</th>
+                    <th>Unidad de Medida</th>
+                    <th>Fecha de Compra</th>
+                    <th>Costo Total</th>
+                    <th>Costo Unitario</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for material in materiales %}
+                <tr>
+                    <td>{{ material.codigo_material }}</td>
+                    <td>{{ material.nombre_material }}</td>
+                    <td>{{ material.unidad_MedidaMat }}</td>
+                    <td>{{ material.fecha_compraMat }}</td>
+                    <td>{{ material.costo_totalMat }}</td>
+                    <td>{{ material.costo_unitarioMat }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

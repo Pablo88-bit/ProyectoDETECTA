@@ -70,7 +70,7 @@ class Alumnos(models.Model):
         #if not self.id:
         #    self.carnet_alumno = generate_carnetalumno()
         #super(Alumnos, self).save(*args, **kwargs)
-
+    
     class Meta:                       # Clase meta podemos cambiar el nombre de tabla en la BD
         db_table = 'Alumnos'
         verbose_name = 'Alumno'
@@ -445,11 +445,23 @@ class ProveedorMateriales(models.Model):
         verbose_name = 'Compra de Material'
         verbose_name_plural = 'Compra de Materiales'
 
-
+#De aquí para abajo creo que no se va a ocupar
 class Temas(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     tema = models.CharField(max_length=50)
 
+
+#Para modificar el pdf
+class PDFConfig(models.Model):
+    imagen = models.ImageField(upload_to='imagenes')
+    posicion_x = models.IntegerField()
+    posicion_y = models.IntegerField()
+    color_fondo = models.CharField(max_length=20)
+    color_letra = models.CharField(max_length=20)
+    tamano_letra = models.IntegerField()
+    encabezado = models.TextField()
+    pie_pagina = models.TextField()
+    # Otros campos para almacenar gráficos adicionales, secciones personalizadas, etc.
 
 # Funciones genera Documents únicos(carnet, códigos, etc...)
 #def generate_carnetalumno():

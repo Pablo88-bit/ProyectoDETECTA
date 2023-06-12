@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Lista de Alumnos</title>
+</head>
+<body>
+
+    <div class="table-container">
+        <h1>Lista de Alumnos</h1>
+        <table style="text-align: justify">
+            <thead>
+                <tr>
+                    <th>Carnet Alumno</th>
+                    <th>Nombre Alumno</th>
+                    <th>Fecha de Nacimiento</th>
+                    <th>Lugar de Nacimiento</th>
+                    <th>Nacionalidad</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alumno in alumnos %}
+                <tr>
+                    <td>{{ alumno.carnet_alumno }}</td>
+                    <td>{{ alumno.nombre_alumno }}</td>
+                    <td>{{ alumno.fechanac_alumno }}</td>
+                    <td>{{ alumno.lugar_alumno }}</td>
+                    <td>{{ alumno.nacionalidad_alumno }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+
