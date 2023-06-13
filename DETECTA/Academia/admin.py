@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django import forms   
+#from .models import GraphData
 from import_export import resources, fields, widgets #Para los reportes
 from import_export.widgets import ForeignKeyWidget #Para los reportes
 from import_export.admin import ImportExportModelAdmin #Para los reportes
@@ -10,7 +11,7 @@ from .models import Cursos, Materiales, MediosDidacticos
 from .models import AlumnoCurso, ProfesorCurso, MaterialesCurso, MediosDidacticosCurso
 from .models import MaterialesProfesor, ProfesorMediosDidacticos
 from .models import ProveedorMateriales, ProveedorMediosDidacticos
-from .models import PDFConfig
+#from .models import PDFConfig
 import random
 from datetime import datetime
 #from django.shortcuts import render
@@ -19,7 +20,7 @@ from datetime import datetime
 #from django.contrib.auth.admin import GroupAdmin, UserAdmin
 #from jazzmin.admin import JazzminModelAdminGroup, JazzminModelAdminUser
 #from .models import Group, User
-from .models import Temas#Sin terminar los temas
+#from .models import Temas#Sin terminar los temas
 #Reportes PDF
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -32,7 +33,7 @@ from xhtml2pdf import pisa
 admin.site.site_header = "ACADEMIA DETECTA"
 
 #Sin terminar los temas
-class AdminThemeMiddleware:
+""" class AdminThemeMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
 
@@ -43,7 +44,7 @@ class AdminThemeMiddleware:
                 request.session["user_theme"] = user_theme.tema
 
         response = self.get_response(request)
-        return response
+        return response """
 
 #Vistas de Alumnos en el sistema
 #######################################################################################
@@ -121,6 +122,17 @@ class AlumnoForm(forms.ModelForm):
                 return super().get_initial_for_field(field, field_name)
         
 
+        """  # Definir los campos adicionales para el gráfico
+        tipo_grafico = forms.ChoiceField(choices=[('barra', 'Gráfico de Barras'), ('pastel', 'Gráfico de Pastel')])
+        datos_grafico = forms.ModelChoiceField(queryset=GraphData.objects.all())
+
+        class Meta:
+                model = Alumnos
+                fields = '__all__' """
+
+
+
+
 class TelefonoAlumnoInline(admin.TabularInline):
         model = TelefonoAlumno
 
@@ -133,6 +145,12 @@ class AlumnoAdmin(ImportExportModelAdmin):
         #change_form_template = 'graficos.html'
 
         form = AlumnoForm
+        """  fieldsets = [
+                ('Configuración del gráfico', {
+                        'fields': ['tipo_grafico', 'datos_grafico'],
+                }),
+        ] """
+
         list_per_page = 8
         list_display=('carnet_alumno', 'nombre_alumno', 'username_alumno', 'nacionalidad_alumno', 'codigo_nivel')
         search_fields=('carnet_alumno', 'nombre_alumno')

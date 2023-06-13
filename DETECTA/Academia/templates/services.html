@@ -24,10 +24,11 @@
 
 
 <section id="text-descripcion">
-    <div class="row text-center" style="padding: 100px; background-color:aquamarine;">
-        <strong><h2 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">ACADEMIA DETECTA</h2></strong>        
+    <div class="row text-center" style="padding: 100px; background-color:rgb(131, 198, 94); color: #fff;">
+        <strong><h2 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">ACADEMIA DETECTA</h2></strong>
+        <strong><h4 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Desarrollo y Transferencia deTecnología Agropecuaria</h4></strong>        
     </div>
-    <div class="row text-center" style="padding: 40px; background-color: #fff;">
+    <!--div class="row text-center" style="padding: 40px; background-color: #fff;">
         <div class="col-md-1"></div>
         <div class="col-md-5">
             <strong><h3 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">RESPONSABLES DE TU ENSEÑANZA</h3></strong>
@@ -48,9 +49,36 @@
             </p>
         </div>
         <div class="col-md-1"></div>
-    </div>
+    </div-->
 </section>
 
+<section class="information" style="border-color: black; border-radius: 5px; margin-top: 40px; color: #fff;">
+  <div class="row" style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
+    <div class="col-1"></div>
+    <div class="col-6">
+      <img src="/static/img/estudiar.jpg" alt="imagen de promoción" style="border-color: black; border-radius: 15px;">
+    </div>
+    <div class="col-2"></div>
+    <div class="col-2" style="background-color:rgb(131, 198, 94); border-top-right-radius: 15px; border-bottom-right-radius: 15px;"><strong><h4 style="margin-top: 220px; margin-left: 15px;">APRENDER ES LO MEJOR</h4></strong></div>
+    <div class="col-1"></div>
+  </div>
+</section>
+
+<section id="information2" style="margin-top: 40px; margin-bottom: 40px;">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-4" style="background-color: #f2f2f2f2; border-bottom-left-radius: 15px; border-top-left-radius: 15px;">
+      <img src="/static/img/ProfesorDETECTA.jpeg" alt="imagen de promoción" style="width: 100%; height: 300px; border-color: black; border-bottom-left-radius: 15px; border-top-left-radius: 15px;">
+    </div>
+    <div class="col-6" style="background-color: #f2f2f2f2; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+        <p style="text-align: justify; font-size: 18px; padding: 60px; width: 100%;">La Academia Detecta, una iniciativa orientada al desarrollo de cursos de formación en linea.
+            Desarrollamos cursos dirigidos a fortalecer capacidades para la explotación eficaz de diversas
+            especies agrícolas y pecuarias. Brindamos de asistencia técnica para el desarrollo de iniciativas de emprendimientos e innovación en proyectos agrícolas.
+        </p>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</section>
 
 <section id="descripcion">
     <div class="card descripcion">
@@ -87,16 +115,17 @@
 </section>
 
 
-<!--section class="container curso">
+<section class="container curso" style="margin-top: 40px; margin-bottom: 40px;">
+    <strong><h2 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">CURSOS</h2></strong>
     <div class="row curso">
         {% for item in cursos %}
-        <div class="col-4 curso">
-            <div class="card card-curso text-center border-success">
-                <div class="card">
-                    <img src="{{ item.image.url }}" class="card-img-top" alt="...">
+        <div class="col-4 curso" style="margin-top: 40px;">
+            <div class="card card-curso text-center border-success" style="height: 550px;">
+                <div class="card" style="margin-top: 30px; height: 100%; text-align: justify;">
+                    <img src="{{ item.image.url }}" class="card-img-top" alt="Curso DETECTA" style="height: 220px;">
                     <div class="card-body">
                         <h5 class="card-title">{{ item.nombre_curso }}</h5>
-                        <p class="card-text">{{ item.descripcion_cursos }}</p>
+                        <p class="card-text" style="height: 120px;">{{ item.descripcion_cursos }}</p>
                         <a href="#" class="btn btn-success">Ver Curso</a>
                     </div>
                 </div>
@@ -104,7 +133,7 @@
         </div>
         {% endfor %}
     </div>
-</section-->
+</section>
 
 
 

@@ -445,6 +445,18 @@ class ProveedorMateriales(models.Model):
         verbose_name = 'Compra de Material'
         verbose_name_plural = 'Compra de Materiales'
 
+""" 
+class GraphData(models.Model):
+    # Añade los campos necesarios para el modelo GraphData
+    # Por ejemplo:
+    tipo_grafico = models.CharField(max_length=50)
+    datos_grafico = models.CharField(max_length=100)
+
+    # Agrega cualquier otro campo o método necesario
+
+    def __str__(self):
+        return f"GraphData {self.pk}"
+
 #De aquí para abajo creo que no se va a ocupar
 class Temas(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -460,7 +472,7 @@ class PDFConfig(models.Model):
     color_letra = models.CharField(max_length=20)
     tamano_letra = models.IntegerField()
     encabezado = models.TextField()
-    pie_pagina = models.TextField()
+    pie_pagina = models.TextField() """
     # Otros campos para almacenar gráficos adicionales, secciones personalizadas, etc.
 
 # Funciones genera Documents únicos(carnet, códigos, etc...)

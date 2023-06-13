@@ -3,9 +3,9 @@
 
 #descripcion{
     padding: 50px;
-    /*margin: 10px;
-    background-color: #f2f2f2;*/
+    /*margin: 10px;*/
     background-color: #f2f2f2;
+    /*background-color: #f2f2f2;*/
 }
 
 #descripcion .card {
@@ -93,8 +93,31 @@
     transform: scale(1.1);
 }
 
+/*
+#Cursos
+.container.curso {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 20px; /* Espacio entre las cards 
+}
 
+.container.curso .card-curso {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
 
+.container.curso .card-body {
+  flex: 1;
+  height: 100%;
+}
+
+.container.curso .card-img-top {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+*/
 
 
 
