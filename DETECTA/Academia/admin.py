@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django import forms   
-#from .models import GraphData
 from import_export import resources, fields, widgets #Para los reportes
 from import_export.widgets import ForeignKeyWidget #Para los reportes
 from import_export.admin import ImportExportModelAdmin #Para los reportes
@@ -11,16 +10,9 @@ from .models import Cursos, Materiales, MediosDidacticos
 from .models import AlumnoCurso, ProfesorCurso, MaterialesCurso, MediosDidacticosCurso
 from .models import MaterialesProfesor, ProfesorMediosDidacticos
 from .models import ProveedorMateriales, ProveedorMediosDidacticos
-#from .models import PDFConfig
+#Para generar Carnet y códigos
 import random
 from datetime import datetime
-#from django.shortcuts import render
-#from django.urls import path
-#from chartjs.views.lines import BaseLineChartView
-#from django.contrib.auth.admin import GroupAdmin, UserAdmin
-#from jazzmin.admin import JazzminModelAdminGroup, JazzminModelAdminUser
-#from .models import Group, User
-#from .models import Temas#Sin terminar los temas
 #Reportes PDF
 from django.http import HttpResponse
 from django.template.loader import get_template
@@ -31,20 +23,6 @@ from xhtml2pdf import pisa
 
 # Register your models here.
 admin.site.site_header = "ACADEMIA DETECTA"
-
-#Sin terminar los temas
-""" class AdminThemeMiddleware:
-    def __init__(self, get_response):
-        self.get_response = get_response
-
-    def __call__(self, request):
-        if request.user.is_authenticated:
-            user_theme = Temas.objects.filter(user=request.user).first()
-            if user_theme:
-                request.session["user_theme"] = user_theme.tema
-
-        response = self.get_response(request)
-        return response """
 
 #Vistas de Alumnos en el sistema
 #######################################################################################
@@ -68,11 +46,11 @@ class AlumnoResources(resources.ModelResource):
                 attribute='get_codigo_nivel_display'
         )
 
-        telefono_alumno = fields.Field(
-                column_name='Teléfono',
-                attribute='alumno',
-                widget=ForeignKeyWidget(TelefonoAlumno, field='telefono_alumno')
-        )
+        #telefono_alumno = fields.Field(
+        #        column_name='Teléfono',
+        #        attribute='alumno',
+        #        widget=ForeignKeyWidget(TelefonoAlumno, field='telefono_alumno')
+        #)
 
         def before_import_row(self, row, **kwargs):
                 telefono = row["alumno"]
@@ -92,7 +70,7 @@ class AlumnoResources(resources.ModelResource):
         class Meta:
                 model = Alumnos
                 exclude = ('id')
-                fields = ('carnet_alumno', 'nombre_alumno', 'curso', 'username_alumno', 'lugar_alumno', 'nacionalidad_alumno', 'fechanac_alumno', 'codigo_nivel_display', 'telefono_alumno')#, 'codigo_tipo_display', 'codigo_empresa_display')
+                fields = ('carnet_alumno', 'nombre_alumno', 'curso', 'username_alumno', 'lugar_alumno', 'nacionalidad_alumno', 'fechanac_alumno', 'codigo_nivel_display')#, 'codigo_tipo_display', 'codigo_empresa_display')
                 export_order = fields
 
 #Generar Carnet Alumno
@@ -120,15 +98,6 @@ class AlumnoForm(forms.ModelForm):
                 if field_name == 'carnet_alumno':
                         return generar_carnet_alumno()
                 return super().get_initial_for_field(field, field_name)
-        
-
-        """  # Definir los campos adicionales para el gráfico
-        tipo_grafico = forms.ChoiceField(choices=[('barra', 'Gráfico de Barras'), ('pastel', 'Gráfico de Pastel')])
-        datos_grafico = forms.ModelChoiceField(queryset=GraphData.objects.all())
-
-        class Meta:
-                model = Alumnos
-                fields = '__all__' """
 
 
 
@@ -145,11 +114,6 @@ class AlumnoAdmin(ImportExportModelAdmin):
         #change_form_template = 'graficos.html'
 
         form = AlumnoForm
-        """  fieldsets = [
-                ('Configuración del gráfico', {
-                        'fields': ['tipo_grafico', 'datos_grafico'],
-                }),
-        ] """
 
         list_per_page = 8
         list_display=('carnet_alumno', 'nombre_alumno', 'username_alumno', 'nacionalidad_alumno', 'codigo_nivel')
@@ -169,7 +133,7 @@ class AlumnoAdmin(ImportExportModelAdmin):
         #Generar pdf alumno
         def generate_pdf(modeladmin, request, queryset):
                 # Obtener la plantilla HTML
-                template = get_template('alumnos_template.html')
+                template = get_template('pdf_alumnos.html')
                 
                 # Datos para generar el PDF
                 context = {
@@ -192,7 +156,7 @@ class AlumnoAdmin(ImportExportModelAdmin):
                 return response
 
 
-        actions = [generate_pdf]
+        #actions = [generate_pdf]
 
         #def change_view(self, request, object_id, form_url='', extra_context=None):
                 # Obtener los datos para el gráfico
@@ -210,8 +174,8 @@ class AlumnoAdmin(ImportExportModelAdmin):
         #        return super().change_view(request, object_id, form_url=form_url, extra_context=extra_context)
 
         #Ocultando el eliminar
-        def has_delete_permission(self, request, obj=None):
-                return False
+        #def has_delete_permission(self, request, obj=None):
+        #        return False
 
 
 #Alumnos
@@ -292,18 +256,18 @@ class EmailProfesorInline(admin.TabularInline):
 
 class ProfesorCursoInline(admin.TabularInline):
         model = ProfesorCurso
-        extra = 1
+        extra = 0
         min_num = 0
 
 class MaterialesProfesorInline(admin.TabularInline):
         model = MaterialesProfesor
-        extra = 1
+        extra = 0
         min_num = 0
 
 
 class ProfesorMediosDidacticosInline(admin.TabularInline):
         model = ProfesorMediosDidacticos
-        extra = 1
+        extra = 0
         min_num = 0
 
 class   ProfesorAdmin(ImportExportModelAdmin):
@@ -326,7 +290,7 @@ class   ProfesorAdmin(ImportExportModelAdmin):
 
         #Generar pdf profesor
         def generate_pdf(self, request, queryset):
-                template = get_template('profesor_template.html')
+                template = get_template('pdf_profesor.html')
                 context = {
                 'profesores': queryset
                 }
@@ -340,11 +304,11 @@ class   ProfesorAdmin(ImportExportModelAdmin):
 
         generate_pdf.short_description = 'Generar PDF'
 
-        actions = ['generate_pdf']
+        #actions = ['generate_pdf']
 
         #Ocultando el eliminar
-        def has_delete_permission(self, request, obj=None):
-                return False
+        #def has_delete_permission(self, request, obj=None):
+        #        return False
 
 
 
@@ -422,12 +386,12 @@ class EmailProveedorInline(admin.TabularInline):
 
 class ProveedorMediosDidacticosInline(admin.TabularInline):
         model = ProveedorMediosDidacticos
-        extra = 1
+        extra = 0
         min_num = 0
 
 class ProveedorMaterialesInline(admin.TabularInline):
         model = ProveedorMateriales
-        extra = 1
+        extra = 0
         min_num = 0
 
 class   ProveedorAdmin(ImportExportModelAdmin):
@@ -449,7 +413,7 @@ class   ProveedorAdmin(ImportExportModelAdmin):
 
         #Generar pdf proveedor
         def generate_pdf(self, request, queryset):
-                template = get_template('proveedor_template.html')
+                template = get_template('pdf_proveedor.html')
                 context = {
                 'proveedores': queryset
                 }
@@ -463,11 +427,11 @@ class   ProveedorAdmin(ImportExportModelAdmin):
 
         generate_pdf.short_description = 'Generar PDF'
 
-        actions = ['generate_pdf']
+        #actions = ['generate_pdf']
 
         #Ocultando el eliminar
-        def has_delete_permission(self, request, obj=None):
-                return False
+        #def has_delete_permission(self, request, obj=None):
+        #        return False
 
 #Proveedores
 admin.site.register(Proveedor, ProveedorAdmin)
@@ -527,18 +491,18 @@ class CursoForm(forms.ModelForm):
 
 class MediosDidacticosCursoInline(admin.TabularInline):
         model = MediosDidacticosCurso
-        extra = 1
+        extra = 0
         min_num = 0
 
 class MaterialesCursoInline(admin.TabularInline):
         model = MaterialesCurso
-        extra = 1
+        extra = 0
         min_num = 0
 
 
 class AlumnoCursoInline(admin.TabularInline):
         model = AlumnoCurso  
-        extra = 1
+        extra = 0
         min_num = 0
 
 class  CursoAdmin(ImportExportModelAdmin):
@@ -560,7 +524,7 @@ class  CursoAdmin(ImportExportModelAdmin):
 
         #Generar pdf cursos
         def generate_pdf(self, request, queryset):
-                template = get_template('cursos_template.html')
+                template = get_template('pdf_cursos.html')
                 context = {
                 'cursos': queryset
                 }
@@ -574,11 +538,11 @@ class  CursoAdmin(ImportExportModelAdmin):
 
         generate_pdf.short_description = 'Generar PDF'
 
-        actions = ['generate_pdf']
+        #actions = ['generate_pdf']
 
         #Ocultando el eliminar
-        def has_delete_permission(self, request, obj=None):
-                return False
+        #def has_delete_permission(self, request, obj=None):
+        #        return False
 
 #Cursos
 admin.site.register(Cursos, CursoAdmin)
@@ -596,7 +560,6 @@ class MaterialesResources(resources.ModelResource):
         nombre_material = fields.Field(column_name='Nombre', attribute='nombre_material')
         descripcion_material = fields.Field(column_name='Descripción', attribute='descripcion_material')
         cantidadMat = fields.Field(column_name='Cantidad', attribute='cantidadMat')
-        precioMat = fields.Field(column_name='Precio', attribute='precioMat')
         unidad_MedidaMat = fields.Field(column_name='Unidad de medida', attribute='unidad_MedidaMat')
         fecha_caducidadMat = fields.Field(column_name='Fecha de caducidad', attribute='fecha_caducidadMat')
         fecha_compraMat = fields.Field(column_name='Fecha de compra', attribute='fecha_compraMat')
@@ -612,7 +575,7 @@ class MaterialesResources(resources.ModelResource):
         class Meta:
                 model = Materiales
                 exclude = ('id')
-                fields = ('codigo_material', 'nombre_material', 'descripcion_material', 'cantidadMat', 'precioMat', 'unidad_MedidaMat', 'fecha_caducidadMat', 'fecha_compraMat', 'costo_totalMat', 'costo_unitarioMat', 'cursos')
+                fields = ('codigo_material', 'nombre_material', 'descripcion_material', 'cantidadMat', 'unidad_MedidaMat', 'fecha_caducidadMat', 'fecha_compraMat', 'costo_totalMat', 'costo_unitarioMat', 'cursos')
                 export_order = fields
 
 #Generar Código Material
@@ -653,7 +616,7 @@ class MaterialesAdmin(ImportExportModelAdmin):
 
         #Generar pdf materiales
         def generate_pdf(self, request, queryset):
-                template = get_template('materiales_template.html')
+                template = get_template('pdf_materiales.html')
                 context = {
                 'materiales': queryset
                 }
@@ -667,11 +630,11 @@ class MaterialesAdmin(ImportExportModelAdmin):
 
         generate_pdf.short_description = 'Generar PDF'
 
-        actions = ['generate_pdf']
+        #actions = ['generate_pdf']
 
         #Ocultando el eliminar
-        def has_delete_permission(self, request, obj=None):
-                return False
+        #def has_delete_permission(self, request, obj=None):
+        #        return False
 
 #Materiales
 admin.site.register(Materiales, MaterialesAdmin)
@@ -691,7 +654,6 @@ class MediosDidacticosResources(resources.ModelResource):
         nombre_medio = fields.Field(column_name='Nombre del Medio Didáctico', attribute='nombre_medio')
         descripcion_medio = fields.Field(column_name='Descripción', attribute='descripcion_medio')
         cantidad = fields.Field(column_name='Cantidad', attribute='cantidad')
-        precio = fields.Field(column_name='Precio del Producto', attribute='precio')
         unidad_Medida = fields.Field(column_name='Unidad de Medida', attribute='unidad_Medida')
         fecha_caducidad = fields.Field(column_name='Fecha de Caducidad del Producto', attribute='fecha_caducidad')
         fecha_compra = fields.Field(column_name='Fecha de la Compra del Producto', attribute='fecha_compra')
@@ -708,7 +670,7 @@ class MediosDidacticosResources(resources.ModelResource):
         class Meta:
                 model = MediosDidacticos
                 exclude = ('id')
-                export_order = ('codigo_medios', 'nombre_medio', 'descripcion_medio', 'cantidad', 'precio', 'unidad_Medida', 'fecha_caducidad', 'fecha_compra', 'costo_total', 'costo_unitario', 'estado_asignacion','curso')
+                export_order = ('codigo_medios', 'nombre_medio', 'descripcion_medio', 'cantidad', 'unidad_Medida', 'fecha_caducidad', 'fecha_compra', 'costo_total', 'costo_unitario', 'estado_asignacion','curso')
 
 #Generar Código Medio Didáctico
 def generar_codigo_medio_didactico():
@@ -747,7 +709,7 @@ class MediosDidacticosAdmin(ImportExportModelAdmin):
 
         #Generar pdf medios didácticos
         def generate_pdf(self, request, queryset):
-                template = get_template('medios_template.html')
+                template = get_template('pdf_medios.html')
                 context = {
                 'medios': queryset
                 }
@@ -761,11 +723,11 @@ class MediosDidacticosAdmin(ImportExportModelAdmin):
 
         generate_pdf.short_description = 'Generar PDF'
 
-        actions = ['generate_pdf']
+        #actions = ['generate_pdf']
 
         #Ocultando el eliminar
-        def has_delete_permission(self, request, obj=None):
-                return False
+        #def has_delete_permission(self, request, obj=None):
+        #        return False
 
 #Medios Didácticos
 admin.site.register(MediosDidacticos, MediosDidacticosAdmin)

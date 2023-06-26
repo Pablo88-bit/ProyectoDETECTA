@@ -13,8 +13,6 @@
                 <tr style="text-align: justify">
                     <th>Código Curso</th>
                     <th>Nombre Curso</th>
-                    <th>Fecha de Inicio</th>
-                    <th>Fecha Final</th>
                     <th>Especialidad</th>
                 </tr>
             </thead>
@@ -23,8 +21,6 @@
                 <tr style="text-align: justify">
                     <td>{{ curso.codigo_curso }}</td>
                     <td>{{ curso.nombre_curso }}</td>
-                    <td>{{ curso.fecha_inicio }}</td>
-                    <td>{{ curso.fecha_final }}</td>
                     <td>{{ curso.get_codigo_especialidad_display }}</td>
                 </tr>
                 {% endfor %}

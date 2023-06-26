@@ -1,0 +1,28 @@
+{% extends 'base3.html' %}
+
+{% block content %}
+
+<section class="container curso-detalle" style="margin-top: 80px; margin-bottom: 80px;">
+    <div class="card card-curso-detalle border-success" style="color: black; height: 100%;">
+        <div class="row">
+            <div class="col-6">
+                <img src="{{ cursos.image.url }}" class="card-img-top" alt="{{ curso.nombre_curso }}" style="width: 100%; height: 100%;">
+            </div>
+            <div class="col-4"  style="text-align: justify;">
+                <h4 class="card-title" style="padding-left: 20px; color: rgb(50, 133, 97); font-weight: bold;">{{ cursos.nombre_curso }}</h4>
+                <div class="card-body">
+                    <div class="detalle-info" style="padding-left: 10px;">
+                        <p><strong>Fecha de inicio:</strong> {{ cursos.fecha_inicio }}</p>
+                        <p><strong>Fecha final:</strong> {{ cursos.fecha_final }}</p>
+                        <p><strong>Número de horas:</strong> {{ cursos.numero_horas }}</p>
+                        <p><strong>Descripción del curso:</strong></p><p>{{ cursos.descripcion_cursos }}</p>
+                        <p><strong>Especialidad:</strong> {{ cursos.get_codigo_especialidad_display }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

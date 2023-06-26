@@ -22,13 +22,20 @@
     </header>
 </section>
 
-
 <section id="text-descripcion">
-    <div class="row text-center" style="padding: 100px; background-color:rgb(131, 198, 94); color: #fff;">
+    <div class="row text-center" style="padding: 50px; color: rgb(50, 133, 97);">
         <strong><h2 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">ACADEMIA DETECTA</h2></strong>
         <strong><h4 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Desarrollo y Transferencia deTecnología Agropecuaria</h4></strong>        
     </div>
-    <!--div class="row text-center" style="padding: 40px; background-color: #fff;">
+</section>
+
+
+<!--section id="text-descripcion">
+    <div class="row text-center" style="padding: 100px; background-color:rgb(50, 133, 97); color: #fff;">
+        <strong><h2 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">ACADEMIA DETECTA</h2></strong>
+        <strong><h4 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">Desarrollo y Transferencia deTecnología Agropecuaria</h4></strong>        
+    </div>
+    <div class="row text-center" style="padding: 40px; background-color: #fff;">
         <div class="col-md-1"></div>
         <div class="col-md-5">
             <strong><h3 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">RESPONSABLES DE TU ENSEÑANZA</h3></strong>
@@ -49,29 +56,29 @@
             </p>
         </div>
         <div class="col-md-1"></div>
-    </div-->
-</section>
+    </div>
+</section-->
 
-<section class="information" style="border-color: black; border-radius: 5px; margin-top: 40px; color: #fff;">
+<!--section class="information" style="border-color: black; border-radius: 5px; margin-top: 80px; color: #fff;">
   <div class="row" style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">
     <div class="col-1"></div>
-    <div class="col-6">
-      <img src="/static/img/estudiar.jpg" alt="imagen de promoción" style="border-color: black; border-radius: 15px;">
+    <div class="col-4" style="width: auto;background-color: #f2f2f2;">
+      <img src="/static/img/estudiar.jpg" alt="imagen de promoción" style="width: 100%; border-color: black; border-radius: 15px;">
     </div>
-    <div class="col-2"></div>
-    <div class="col-2" style="background-color:rgb(131, 198, 94); border-top-right-radius: 15px; border-bottom-right-radius: 15px;"><strong><h4 style="margin-top: 220px; margin-left: 15px;">APRENDER ES LO MEJOR</h4></strong></div>
-    <div class="col-1"></div>
+    <div class="col-4" style="background-color:rgb(50, 133, 97); border-top-right-radius: 15px; border-bottom-right-radius: 15px;"><strong><h4 style="margin-top: 220px; margin-left: 15px;">APRENDER ES LO MEJOR</h4></strong></div>
+    <div class="col-1" style="background-color:rgb(50, 133, 97);"></div>
   </div>
-</section>
+</section-->
 
-<section id="information2" style="margin-top: 40px; margin-bottom: 40px;">
+<section id="information2" style="margin-bottom: 40px;">
   <div class="row">
     <div class="col-1"></div>
-    <div class="col-4" style="background-color: #f2f2f2f2; border-bottom-left-radius: 15px; border-top-left-radius: 15px;">
+    <div class="col-4" style="background-color: #e0dbdb; border-bottom-left-radius: 15px; border-top-left-radius: 15px;">
       <img src="/static/img/ProfesorDETECTA.jpeg" alt="imagen de promoción" style="width: 100%; height: 300px; border-color: black; border-bottom-left-radius: 15px; border-top-left-radius: 15px;">
     </div>
-    <div class="col-6" style="background-color: #f2f2f2f2; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
-        <p style="text-align: justify; font-size: 18px; padding: 60px; width: 100%;">La Academia Detecta, una iniciativa orientada al desarrollo de cursos de formación en linea.
+    <div class="col-6" style="background-color: #e0dbdb; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+        <p style="text-align: justify; font-size: 18px; padding: 60px; width: 100%;">
+            La Academia Detecta, una iniciativa orientada al desarrollo de cursos de formación en linea.
             Desarrollamos cursos dirigidos a fortalecer capacidades para la explotación eficaz de diversas
             especies agrícolas y pecuarias. Brindamos de asistencia técnica para el desarrollo de iniciativas de emprendimientos e innovación en proyectos agrícolas.
         </p>
@@ -85,7 +92,7 @@
         <div class="card-header">
             <h3>Servicios</h3>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="border-color:  #333;">
             <div class="row">
                 <div class="col-md-1"></div>
                 <div class="col-md-5">
@@ -115,7 +122,7 @@
 </section>
 
 
-<section class="container curso" style="margin-top: 40px; margin-bottom: 40px;">
+<section class="container curso" style="margin-top: 80px; margin-bottom: 80px;">
     <strong><h2 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">CURSOS</h2></strong>
     <div class="row curso">
         {% for item in cursos %}
@@ -126,7 +133,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ item.nombre_curso }}</h5>
                         <p class="card-text" style="height: 120px;">{{ item.descripcion_cursos }}</p>
-                        <a href="#" class="btn btn-success">Ver Curso</a>
+                        <a href="{% url 'cursodetalle' item.id %}" class="btn btn-success">Ver Curso</a>
                     </div>
                 </div>
             </div>
@@ -205,24 +212,24 @@
     <div class="galeria">
         <div class="row">
             <div class="col-4">
-                <img src="/static/img/portada2.jpg" alt="Image 1">
+                <img src="/static/img/Carrucel1.jpeg" alt="Image 1" style="height: 100%;">
             </div>
             <div class="col-4">
-                <img src="/static/img/estudiar2.jpg" alt="Image 2">
+                <img src="/static/img/Carrucel2.jpeg" alt="Image 2" style="height: 100%;">
             </div>
             <div class="col-4">
-                <img src="/static/img/estudiar3.jpg" alt="Image 3">
+                <img src="/static/img/Carrucel3.jpeg" alt="Image 3" style="height: 100%;">
             </div>
         </div>
         <div class="row">
             <div class="col-4">
-                <img src="/static/img/hombre2(2).jpg" alt="Image 4">
+                <img src="/static/img/Carrucel4.jpeg" alt="Image 4" style="height: 100%;">
             </div>
             <div class="col-4">
-                <img src="/static/img/Estudiantes.jpg" alt="Image 5">
+                <img src="/static/img/Carrucel5.jpeg" alt="Image 5" style="height: 100%;">
             </div>
             <div class="col-4">
-                <img src="/static/img/trabajando1.jpg" alt="Image 6">
+                <img src="/static/img/Carrucel6.jpeg" alt="Image 6" style="height: 100%;">
             </div>
         </div>
     </div>

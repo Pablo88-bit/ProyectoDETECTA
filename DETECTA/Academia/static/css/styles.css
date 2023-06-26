@@ -109,6 +109,22 @@ body {
 
 
 
+
+/*Galeria Index*/
+#galeriaindex .galeria img {
+    border-color: rgb(16, 252, 106);
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+#galeriaindex .galeria img:hover {
+    transform: scale(1.1);
+}
+
+
+
+
+
 /* footer */
 #footer {
     background-color: rgb(3, 105, 124);

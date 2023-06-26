@@ -52,7 +52,7 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 #Settings Jazzmin
 JAZZMIN_SETTINGS = {
-    "show_ui_builder": True, #El constructor de interfaz de usuario de Jazzmin
+    #"show_ui_builder": True, #El constructor de interfaz de usuario de Jazzmin
 
     # title of the window (Will default to current_admin_site.site_title if absent or None)
     "site_title": "DETECTA",
@@ -94,7 +94,7 @@ JAZZMIN_SETTINGS = {
             'url': 'http://127.0.0.1:8000',
             "icon": "fas fa-house",
         },
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        #{"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
         #{   'type': 'url',
        #     'name': 'Graficos',
        #     'url': 'http://127.0.0.1:8000/graficos/',

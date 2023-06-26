@@ -25,7 +25,67 @@
 </section>
 
 
-<section id="descripcion">
+
+<section id="information2" style="margin-top: 40px; margin-bottom: 40px;">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-4" style="background-color: #e0dbdb; border-bottom-left-radius: 15px; border-top-left-radius: 15px;">
+      <img src="/static/img/Promocion2.jpeg" alt="imagen de promoción" style="width: 100%; height: 350px; border-color: black; border-bottom-left-radius: 15px; border-top-left-radius: 15px;">
+    </div>
+    <div class="col-6" style="padding: 60px; background-color: #e0dbdb; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+      <h3 style=" font-weight: bold; color: #fff; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; font-size: 20px;">Misión</h3>
+      <p style="text-align: justify; font-size: 18px; width: 100%;">
+          Prestar servicios de asistencia técnica y/o asesoría personalizada con calidad;
+          que permitan la promoción y ejecución de la innovación tecnológica empresarial,
+          con el propósito de que la empresa agropecuaria; sea competitiva; y responda al
+          contexto empresarial moderno. 
+      </p>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</section>
+
+<section id="information2" style="margin-top: 40px; margin-bottom: 40px;">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-4" style="background-color: #e0dbdb; border-bottom-left-radius: 15px; border-top-left-radius: 15px;">
+      <img src="/static/img/promocionales3.jpeg" alt="imagen de promoción" style="width: 100%; height: 350px; border-color: black; border-bottom-left-radius: 15px; border-top-left-radius: 15px;">
+    </div>
+    <div class="col-6" style="padding: 60px; background-color: #e0dbdb; border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+      <h3 style=" font-weight: bold; color: #fff; text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; font-size: 20px;">Visión</h3>
+      <p style="text-align: justify; font-size: 18px; width: 100%; font-size: 20px;">
+          Ser una empresa de servicios, vanguardia en la promoción e implementación de proyectos
+          de desarrollo e investigación y la transferencia de tecnología, logrando el crecimiento
+          competitivo eficaz y sostenible de la industria agropecuaria en nuestro país y el área
+          centroamericana.
+      </p>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</section>
+
+<section id="information2" style="margin-bottom: 40px;">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-6 text-center">
+      <h3 style="padding-top: 80px;"><strong>¿Qué es la academia DETECTA?</strong></h3>
+      <p style="text-align: justify; padding-top: 30px; font-size: 18px; width: 100%;">
+        La academia DETECTA es la plataforma digital creada para facilitar el desarrollo
+        de servicios de formación educativa dirigida a promover el desarrollo de iniciativas
+        de emprendimiento, e innovación en el desarrollo de proyectos agrícolas y pecuarios;
+        permitiendo el incremento de la productividad y el desarrollo sostenible.
+
+        Y en ella se pone a la disposición de los usuarios los servicios de asesoría para el
+        desarrollo de proyectos de una manera directa y accesible.
+      </p>
+    </div>
+    <div class="col-4">
+      <img src="/static/img/Promocion1.jpeg" alt="" style="width: 100%;">
+    </div>
+    <div class="col-1"></div>
+  </div>
+</section>
+<!--section id="descripcion">
   <div class="card descripcion">
       <div class="card-header">
           <h3>Nosotros</h3>
@@ -45,7 +105,7 @@
                     campo de la tecnología de la información, brindándoles a nuestros estudiantes la oportunidad de
                     aprender de expertos en la materia.</p> <i style="font-size: 40px" class="fas fa-briefcase history-icon"></i>
               </div>
-              <!--div class="col-md-1"><i style="font-size: 40px" class="fas fa-headset"></i></!div-->
+              <!--div class="col-md-1"><i style="font-size: 40px" class="fas fa-headset"></i></!div>
           </div>
           <div class="row">
               <div class="col-md-1"></div>
@@ -60,7 +120,7 @@
           </div>
       </div>
   </div>
-</section>
+</section-->
 
 <!--section class="video-section">
   <div class="container">
@@ -190,34 +250,20 @@
 </section-->
 
 <section class="image-section">
+  <strong><h2 style="text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;">DOCENTES</h2></strong>
   <div class="row">
-    <div class="col-4">
-      <div class="card">
+    {% for item in profesor %}
+    <div class="col-4" style="margin-top: 40px;">
+      <div class="card border-success" style="height: 550px; text-align: justify;">
         <div class="image-item">
-          <img src="/static/img/estudiar.jpg" alt="Imagen 1">
-          <h4 class="card-title">Título de la imagen 1</h4>
-          <p>Descripción de la imagen 1</p>
+          <img src="{{ item.image.url }}" alt="Docente DETECTA" style="height: 220px;">
+          <h4 class="card-title">{{ item.nombre_teacher }}</h4>
+          <p style="height: 120px;">{{ item.descripcion_profesor }}</p>
+          <a href="{% url 'docentedetalle' item.id %}" class="btn btn-success">Conocer Docente</a>
         </div>
       </div>
     </div>
-    <div class="col-4">
-      <div class="card">
-        <div class="image-item">
-          <img src="/static/img/estudiar.jpg" alt="Imagen 2">
-          <h4 class="card-title">Título de la imagen 2</h4>
-          <p>Descripción de la imagen 2</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-4">
-      <div class="card">
-        <div class="image-item">
-          <img src="/static/img/estudiar.jpg" alt="Imagen 3">
-          <h4 class="card-title">Título de la imagen 3</h4>
-          <p>Descripción de la imagen 3</p>
-        </div>
-      </div>
-    </div>
+    {% endfor %}
   </div>
 </section>
 
